@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Seminar CompLing</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+  <link rel='stylesheet' href='https://cdn.jsdelivr.net/jquery.slick/latest/slick.css'><link rel="stylesheet" href="./style.css">
+
+</head>
+<body>
+
+<main class="content">
+  <header class="site-header">
+    
+    <!--слово комплинг на хедере-->
+    <h1 class="site-header__logo">
+      <svg width="500" height="150" viewBox="0 0 500 150" xmlns="http://www.w3.org/2000/svg">
+        <text x="50" y="100" font-family="Arial" font-size="50" fill="#fff">CompLing</text>
+        <text x="52" y="102" font-family="Arial" font-size="50" fill="#888">CompLing</text>
+      </svg>
+      <span class="srt">CompLing</span>
+    </h1>
+    <!--конец слово комплинг на хедере-->
+    
+    <!--меню хедера-->
+    <section class="site-header__actions">
+      <nav class="site-nav">
+        <a href="#0" class="site-nav__item"><span>Dates</span></a>
+        <a href="#0" class="site-nav__item"><span>Publications</span></a>
+        <a href="#0" class="site-nav__item active"><span>About</span></a>
+      </nav>
+    </section>
+    <!--конец меню хедера-->
+
+  </header>
+  
+  <section class="upper-landing">
+    <div class="upper-landing__colophon">
+
+      <!--вертикальный текст-->
+      <div class="tagline">
+        International Seminar. <span style="color: yellow;"> 2025 Season</span>
+      </div>
+      <!--конец вертикальный текст-->
+      
+      <!--связь-->
+      <div class="social">
+        <a href="mailto:ims-compling@yandex.ru" class="social__link"> 
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="#999">
+            <path d="M2,6.5 L2,14.5 C2,15.328 2.672,16 3.5,16 L16.5,16 C17.328,16 18,15.328 18,14.5 L18,6.5 L10,11.75 L2,6.5 Z M2,5 L10,10.25 L18,5 L10,1.25 L2,5 Z"/>
+          </svg>
+        </a>
+        <a href="https://t.me/compling_seminar" class="social__link">
+          <svg width="18" height="18" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#999">
+            <title>Telegram</title>
+            <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.292 7.081l-2.12 10.042c-.16.718-.576.891-1.165.555l-3.215-2.37-1.553 1.497c-.172.172-.316.317-.646.317l.231-3.243 5.906-5.316c.258-.231-.057-.36-.401-.13l-7.296 4.59-3.141-.984c-.682-.211-.696-.682.141-.978l13.015-5.018c.576-.215 1.071.13.892.967z"></path>
+          </svg>
+        </a>
+      </div>
+      <!--конец связь-->
+    </div>
+    
+    <!--заголовок и слоган и CTA-->
+    <div class="upper-landing__info">
+      <header class="upper-landing__header">
+        <h2>
+          A Place Where Human Language and Algorithms Engage in Dialogue
+        </h2>
+      </header>
+      <div class="upper-landing__copy">
+        Explore Cutting-Edge Research and Innovations in the Field of Language Technology
+      </div>
+     
+      <div class="upper-landing__cta">
+        <a href="#0" class="button">take part</a>
+      </div>
+ 
+    </div>
+    <!--конец заголовок и слоган и CTA-->
+
+    <div class="upper-landing__slideshow">
+      <div class="landing-slideshow" id="landing-slideshow">
+        <div class="landing-slideshow__slide" data-color-class="compling">
+          <h2>CompLing Seminar</h2>
+          <div class="event-date">June 23-26, 2025</div>
+          <div class="slide-line compling-line"></div>
+          <p>International Seminar Computational Linguistics (CompLing-2025) 
+            is focused on discussing cutting-edge research and applied developments in the fields of computational modeling 
+            and natural language processing, information retrieval, automated knowledge extraction from text corpora, 
+            and speech technologies. A key task of the seminar is the integration of scientific approaches 
+            in computational linguistics with machine learning techniques and neural network models. 
+            Thus, the seminar serves as a platform for interaction among computational linguists,
+            AI researchers, and NLP industrial projects, stimulating interdisciplinary exchange of knowledge and innovations.</p>
+        </div>
+        <div class="landing-slideshow__slide" data-color-class="zakharov">
+          <h2>Zakharov.day</h2>
+          <div class="event-date">March 13, 2025</div>
+          <div class="slide-line zakharov-line"></div>
+          <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+        </div>
+        <div class="landing-slideshow__slide" data-color-class="textmining">
+          <h2>TextMining.day</h2>
+          <div class="event-date">September 7, 2025</div>
+          <div class="slide-line textmining-line"></div>
+          <p>Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante.</p>
+        </div>
+        <div class="landing-slideshow__slide" data-color-class="llm">
+          <h2>LLM.day</h2>
+          <div class="event-date">December 23, 2025</div>
+          <div class="slide-line llm-line"></div>
+          <p>Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est.</p>
+        </div>
+        
+        
+        <!-- /__slide -->
+      </div>
+      <!-- /.landing-slideshow -->
+      <div class="upper-landing__slideshow-controls">
+        <div class="slideshow-dots"></div>
+        <!-- /.slideshow-dots -->
+        <div class="slideshow-arrows">
+          <div class="slideshow-arrows__prev" id="ul-prev">
+            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/6791/braun-left-arrow.png" alt="Previous Slide">
+          </div>
+          <!-- /__prev -->
+          <div class="slideshow-arrows__next" id="ul-next">
+            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/6791/braun-right-arrow.png" alt="Next Slide">
+          </div>
+          <!-- /__next -->
+        </div>
+        <!-- /.slideshow-arrows -->
+      </div>
+      <!-- /__slideshow-controls -->
+    </div>
+    <!-- /__slideshow -->
+    
+    
+  </section>
+
+
+  <section class="mid-landing">
+    <div class="container">
+      <div class="mid-landing__cta-row">
+          <section class="learn-more-card">
+            <a href="#0">
+              <header>
+                <h2 class="learn-more-card__title">Watches</h2>
+              </header>
+              <div class="learn-more-card__copy">
+                The Braun watch collection has
+                been created as a true
+                representation of quality, clarity,
+                longevity, and timelessness.
+              </div>
+              <!-- /__copy -->
+              <footer>
+                <div class="learn-more-card__line">
+                  <span class="line-component"></span><span class="line-component"></span><span class="line-component"></span>
+              </div>
+                <p href="#0" class="learn-more-card__cta">Learn More</p>
+              </footer>
+            </a>
+          </section>
+          <section class="learn-more-card">
+            <a href="#0">
+              <header>
+                <h2 class="learn-more-card__title">Health</h2>
+              </header>
+              <div class="learn-more-card__copy">
+                Get the latest advice for a happy,
+                healthy life for you and your family,
+                from Barun healthcare. Award
+                winning fever thermometers.
+              </div>
+              <!-- /__copy -->
+              <footer>
+                <div class="learn-more-card__line">
+                  <span class="line-component"></span><span class="line-component"></span><span class="line-component"></span>
+                </div>
+                <p href="#0" class="learn-more-card__cta">Learn More</p>
+              </footer>
+            </a>
+          </section>
+          <section class="learn-more-card">
+            <a href="#0">
+              <header>
+                <h2 class="learn-more-card__title">Kitchen</h2>
+              </header>
+              <div class="learn-more-card__copy">
+                Turn over a new leaf.
+                Conquor the expected this New
+                Year with creative ways to get
+                healthy and eat your veggies.
+              </div>
+              <!-- /__copy -->
+              <footer>
+                <div class="learn-more-card__line">
+                  <span class="line-component"></span><span class="line-component"></span><span class="line-component"></span>
+                </div>
+                <p href="#0" class="learn-more-card__cta">Learn More</p>
+              </footer>
+            </a>
+          </section>
+      </div>
+      <!-- /__cta-row -->
+    </div>
+    <!-- /.container -->
+    <div class="mid-landing__product-row">
+      <div class="product-info">
+        <h2 class="product-info__title">Anything less would be too much</h2>
+        <div class="product-info__copy">
+          Braun clocks have been designed to enhance their
+          individual uses through a combination of features
+          and functions. The Braun watch collection has been
+          created as a true representation of quality.
+        </div>
+        <div class="product-info__cta">
+          <a href="#0" class="button--alternate">Buy Now</a>
+        </div>
+      </div>
+      <!-- /.product-info -->
+      <div class="product-photo"></div>
+    </div>
+    <!-- /__product-row -->
+  </section>
+  <section class="lower-landing">
+    <div class="overlay">
+      <div class="container">
+        <div class="overlay__content">
+          <h2 class="lower-landing__heading">Take control of<br> your health</h2>
+          <div class="lower-landing__copy">
+            Braun clocks have been designed to enchance their
+            individual uses through a combination of features
+            and functions. The Braun watch collection has been
+            created as a true representation of quality.
+          </div>
+          <div class="lower-landing__cta">
+            <a href="#0" class="button--white">Explore Options</a>
+          </div>
+        </div>
+        <!-- /.overlay-content -->
+      </div>
+    </div>
+    <!-- /.overlay -->
+  </section>
+</main>
+<!-- partial -->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+<script src='https://cdn.jsdelivr.net/jquery.slick/latest/slick.min.js'></script><script  src="./script.js"></script>
+
+</body>
+</html>
