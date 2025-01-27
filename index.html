@@ -14,7 +14,7 @@
     
     <!--слово комплинг на хедере-->
     <h1 class="site-header__logo">
-      <svg width="500" height="70" viewBox="0 0 500 70" xmlns="http://www.w3.org/2000/svg">
+      <svg width="500" height="50" viewBox="0 0 500 50" xmlns="http://www.w3.org/2000/svg">
        
       </svg>
       <!--<span class="srt">CompLing</span>-->
@@ -24,9 +24,9 @@
     <!--меню хедера-->
     <section class="site-header__actions">
       <nav class="site-nav">
-        <a href="#0" class="site-nav__item"><span>Dates</span></a>
-        <a href="#0" class="site-nav__item"><span>Publications</span></a>
-        <a href="#0" class="site-nav__item active"><span>About</span></a>
+        <a href="#0" class="site-nav__item"><span>Important Dates</span></a>
+        <a href="#0" class="site-nav__item"><span>Our Journals</span></a>
+        <a href="#inf" class="site-nav__item active"><span>About Events</span></a>
       </nav>
     </section>
     <!--конец меню хедера-->
@@ -91,28 +91,45 @@
            <div id="connected-graph"></div>
            
           </div>
-
-
-
           
         </div>
         <div class="landing-slideshow__slide" data-color-class="zakharov">
           <h2>Zakharov.day</h2>
           <div class="event-date">March 13, 2025</div>
           <div class="slide-line zakharov-line"></div>
-          <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            </p>
         </div>
+
         <div class="landing-slideshow__slide" data-color-class="textmining">
           <h2>TextMining.day</h2>
           <div class="event-date">September 7, 2025</div>
           <div class="slide-line textmining-line"></div>
-          <p>Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante.</p>
+          <div class="content">
+            <div class="text-zone">
+              <p>Which intersection of entities will you choose for your project? 
+                Let's piece the puzzle together and explore areas like sentiment analysis,
+                 semantic modeling, and other methods we use to uncover meaning in texts.</p>
+            </div>
+            <div id="venn-chart" style="width: 800px; height: 400px; margin: auto;"></div>
+          </div>
+          
         </div>
         <div class="landing-slideshow__slide" data-color-class="llm">
           <h2>LLM.day</h2>
           <div class="event-date">December 23, 2025</div>
           <div class="slide-line llm-line"></div>
-          <p>Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est.</p>
+          <div class="content">
+            <div class="text-zone">
+              <p>What challenges do we face in building large language models? 
+                From managing massive datasets to tackling high fine-tuning costs and addressing data privacy concerns, 
+                creating your own LLM is no small feat. Join us to discuss these hurdles and discover how 
+                LLMs are transforming the way we approach AI across industries.</p>
+
+            </div>
+            <div id="llm-interactive-brain" style="width: 800px; height: 500px; margin: auto;"></div>
+          </div>
+
         </div>
         
         
@@ -142,7 +159,7 @@
   </section>
 
 
-  <section class="mid-landing">
+  <section class="mid-landing" id="inf">
     <div class="container">
       <div class="mid-landing__cta-row">
           <section class="learn-more-card">

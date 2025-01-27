@@ -33,7 +33,7 @@ $(document).ready(function() {
 
 document.addEventListener("DOMContentLoaded", function () {
   const width = 700;
-  const height = 550;
+  const height = 540;
 
  
 
@@ -186,6 +186,84 @@ if (!event.active) simulation.alphaTarget(0);
 d.fx = null;
 d.fy = null;
 }
+});
+
+
+
+document.addEventListener("DOMContentLoaded", function () {
+  const svgWidth = 700;
+  const svgHeight = 540;
+
+  const svg = d3
+      .select("#venn-chart")
+      .append("svg")
+      .attr("width", svgWidth)
+      .attr("height", svgHeight);
+
+  // Данные для кругов
+  const circles = [
+      { id: "Linguistics", x: 200, y: 200, r: 90, color: "#8bc34a" },
+      { id: "NLP", x: 300, y: 250, r: 100, color: "#ff6f61" },
+      { id: "ML", x: 400, y: 300, r: 150, color: "#5ebaff" },
+      { id: "AI", x: 250, y: 350, r: 120, color: "#ffa726" },
+      
+  ];
+
+  const circleGroups = svg
+      .selectAll("g")
+      .data(circles)
+      .enter()
+      .append("g")
+      .call(
+          d3.drag()
+              .on("start", dragStart)
+              .on("drag", drag)
+              .on("end", dragEnd)
+      );
+
+  // Рисуем круги
+  circleGroups
+      .append("circle")
+      .attr("cx", (d) => d.x)
+      .attr("cy", (d) => d.y)
+      .attr("r", (d) => d.r)
+      .attr("fill", (d) => d.color)
+      .attr("fill-opacity", 0.7)
+      .attr("stroke", "#ffffff")
+      .attr("stroke-width", 2);
+
+  // Текст в круге
+  circleGroups
+      .append("text")
+      .attr("x", (d) => d.x)
+      .attr("y", (d) => d.y)
+      .text((d) => d.id)
+      .attr("font-size", "14px")
+      .attr("fill", "#ffffff")
+      .attr("font-family", "Arial")
+      .attr("text-anchor", "middle")
+      .attr("dy", "0.35em");
+
+  // Функции для перетаскивания
+  function dragStart(event, d) {
+      d3.select(this).raise().classed("active", true);
+  }
+
+  function drag(event, d) {
+      d3.select(this)
+          .select("circle")
+          .attr("cx", (d.x = event.x))
+          .attr("cy", (d.y = event.y));
+
+      d3.select(this)
+          .select("text")
+          .attr("x", (d.x = event.x))
+          .attr("y", (d.y = event.y));
+  }
+
+  function dragEnd(event, d) {
+      d3.select(this).classed("active", false);
+  }
 });
 
 
