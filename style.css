@@ -492,3 +492,18 @@ img {
 .upper-landing__slideshow.llm .slick-dots button:hover {
   background-color: #ff007b; /* Розовый для LLM.day */
 }
+
+
+
+#connected-graph {
+  
+  width: 100%;
+  height: 50vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+
+
