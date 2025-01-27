@@ -32,8 +32,8 @@ $(document).ready(function() {
 
 
 document.addEventListener("DOMContentLoaded", function () {
-  const width = 800;
-  const height = 600;
+  const width = 700;
+  const height = 550;
 
  
 
@@ -155,17 +155,18 @@ const text = svg
 
 // Обновление позиции
 simulation.on("tick", () => {
-link.attr("d", (d) => {
-return `M${d.source.x},${d.source.y}C${(d.source.x + d.target.x) / 2},${d.source.y} ${
-(d.source.x + d.target.x) / 2
-},${d.target.y} ${d.target.x},${d.target.y}`;
-});
+  link.attr("d", (d) => {
+    return `M${Math.max(0, d.source.x)},${Math.max(0, d.source.y)}
+            C${Math.max(0, (d.source.x + d.target.x) / 2)},${Math.max(0, d.source.y)} 
+            ${Math.max(0, (d.source.x + d.target.x) / 2)},${Math.max(0, d.target.y)} 
+            ${Math.max(0, d.target.x)},${Math.max(0, d.target.y)}`;
+  });
 
-node.attr("cx", (d) => d.x).attr("cy", (d) => d.y);
+  node.attr("cx", (d) => Math.max(10, Math.min(width - 10, d.x)))
+      .attr("cy", (d) => Math.max(10, Math.min(height - 10, d.y)));
 
-text
-.attr("x", (d) => d.x)
-.attr("y", (d) => d.y - d.weight / 2 - 5); // Текст над узлами
+  text.attr("x", (d) => Math.max(10, Math.min(width - 10, d.x)))
+      .attr("y", (d) => Math.max(10, Math.min(height - 10, d.y - d.weight / 2 - 5)));
 });
 
 // Функции перетаскивания
