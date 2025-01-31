@@ -542,36 +542,39 @@ img {
   border-color: #007bff; /* Цвет границы при фокусе */
 }
 
-.lower-landing__cta button {
-  background-color: #fff;
-  color: #000;
-  border: 1px solid #fff;
-  padding: 0.8rem 1.5rem;
-  font-size: 1rem;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
 
-.lower-landing__cta button:hover {
-  background-color: #007bff; /* Синий фон при наведении */
-  color: #fff;
-}
 
-.timeline {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seminar CompLing</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .product-info__copy {
+      width: 40%;
+      margin: 0 auto;
+      line-height: 1.8;
+      font-size: 1rem;
+    }
+
+    .timeline {
       position: relative;
       margin: 2rem auto;
-      width: 80%;
+      padding: 0;
+      width: 60%;
     }
 
     .timeline::before {
       content: '';
       position: absolute;
-      width: 4px;
-      background-color: #7bff00; /* Original green color */
+      width: 2px;
+      background-color: #7bff00;
       top: 0;
       bottom: 0;
       left: 50%;
@@ -580,9 +583,8 @@ img {
 
     .timeline-event {
       display: flex;
-      align-items: center;
       margin: 2rem 0;
-      width: 100%;
+      position: relative;
     }
 
     .timeline-event:nth-child(odd) {
@@ -593,50 +595,60 @@ img {
       justify-content: flex-end;
     }
 
-    .timeline-content {
-      background-color: #4a4a4a; /* Original gray color */
-      padding: 1rem 1.5rem;
+    .timeline-event .event-content {
+      background-color: #4a4a4a;
+      color: #fff;
+      padding: 1rem;
       border-radius: 10px;
       width: 45%;
       position: relative;
     }
 
-    .timeline-content::after {
+    .timeline-event .event-content::after {
       content: '';
       position: absolute;
+      top: 50%;
       width: 0;
       height: 0;
       border-style: solid;
+      transform: translateY(-50%);
     }
 
-    .timeline-event:nth-child(odd) .timeline-content {
+    .timeline-event:nth-child(odd) .event-content {
       margin-left: 2rem;
     }
 
-    .timeline-event:nth-child(odd) .timeline-content::after {
-      top: 50%;
-      left: -15px;
-      border-width: 10px 15px 10px 0;
-      border-color: transparent #4a4a4a transparent transparent; /* Original gray color */
-      transform: translateY(-50%);
+    .timeline-event:nth-child(odd) .event-content::after {
+      right: 100%;
+      border-width: 10px 10px 10px 0;
+      border-color: transparent #4a4a4a transparent transparent;
     }
 
-    .timeline-event:nth-child(even) .timeline-content {
+    .timeline-event:nth-child(even) .event-content {
       margin-right: 2rem;
     }
 
-    .timeline-event:nth-child(even) .timeline-content::after {
+    .timeline-event:nth-child(even) .event-content::after {
+      left: 100%;
+      border-width: 10px 0 10px 10px;
+      border-color: transparent transparent transparent #4a4a4a;
+    }
+
+    .timeline-event .event-date {
+      position: absolute;
       top: 50%;
-      right: -15px;
-      border-width: 10px 0 10px 15px;
-      border-color: transparent transparent transparent #4a4a4a; /* Original gray color */
+      font-weight: bold;
+      font-size: 0.9rem;
+      color: #7bff00;
       transform: translateY(-50%);
     }
 
-    .timeline-date {
-      font-weight: bold;
-      color: #7bff00; /* Original green color */
-      margin-bottom: 0.5rem;
+    .timeline-event:nth-child(odd) .event-date {
+      right: 60%;
+    }
+
+    .timeline-event:nth-child(even) .event-date {
+      left: 60%;
     }
 
 
