@@ -547,6 +547,16 @@ img {
 
 
 
+/* Фон таймлайна */
+.timeline {
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: rgba(128, 128, 128, 0.1); /* Светлый серый фон */
+  border-radius: 10px;
+}
+
 /* Заголовок и подзаголовок */
 .timeline-title {
   font-size: 2.5rem;
@@ -563,27 +573,21 @@ img {
   line-height: 1.5;
 }
 
-/* Таймлайн */
-.timeline {
-  position: relative;
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
-.timeline::before {
-  content: '';
+/* Вертикальная линия таймлайна */
+.timeline-line {
   position: absolute;
   left: 50%;
+  top: calc(4rem + 20px); /* Начало линии ниже подзаголовка */
   width: 4px;
-  height: 100%;
+  height: calc(100% - 4rem); /* Протяженность линии */
   background-color: #7bff00; /* Зеленая линия */
   transform: translateX(-50%);
 }
 
+/* События таймлайна */
 .timeline-event {
   position: relative;
-  margin-bottom: 2rem;
+  margin: 2rem 0;
 }
 
 .timeline-point {
@@ -614,7 +618,7 @@ img {
   margin-bottom: 0.5rem;
 }
 
-/* Расположение контента */
+/* Чередование событий */
 .timeline-event:nth-child(odd) .timeline-content {
   margin-left: 55%;
 }
