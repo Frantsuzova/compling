@@ -545,107 +545,89 @@ img {
 
 
 
+
+
+/* Заголовок и подзаголовок */
+.timeline-title {
+  font-size: 2.5rem;
+  color: #7bff00; /* Зеленый цвет */
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.timeline-subtitle {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #d1d1d1; /* Серый оттенок */
+  margin-bottom: 2rem;
+  line-height: 1.5;
+}
+
 /* Таймлайн */
 .timeline {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   position: relative;
-  margin: 2rem auto;
-  width: 80%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 20px;
 }
 
 .timeline::before {
   content: '';
   position: absolute;
-  width: 4px;
-  background-color: #7bff00;
-  top: 0;
-  bottom: 0;
   left: 50%;
+  width: 4px;
+  height: 100%;
+  background-color: #7bff00; /* Зеленая линия */
   transform: translateX(-50%);
 }
 
 .timeline-event {
-  display: flex;
-  align-items: center;
-  margin: 2rem 0;
-  width: 100%;
+  position: relative;
+  margin-bottom: 2rem;
 }
 
-.timeline-event:nth-child(odd) {
-  justify-content: flex-start;
-}
-
-.timeline-event:nth-child(even) {
-  justify-content: flex-end;
+.timeline-point {
+  position: absolute;
+  left: 50%;
+  width: 15px;
+  height: 15px;
+  background-color: #7bff00;
+  border-radius: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
 }
 
 .timeline-content {
-  background-color: #4a4a4a;
-  padding: 1.5rem;
-  border-radius: 15px;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
-  width: 45%;
   position: relative;
-  font-size: 1rem;
+  width: 45%;
+  padding: 1rem;
+  background-color: #4a4a4a;
+  color: #ececec;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
-.timeline-content::after {
-  content: '';
-  position: absolute;
-  width: 0;
-  height: 0;
-  border-style: solid;
-}
-
-.timeline-event:nth-child(odd) .timeline-content {
-  margin-left: 2rem;
-}
-
-.timeline-event:nth-child(odd) .timeline-content::after {
-  top: 50%;
-  left: -15px;
-  border-width: 10px 15px 10px 0;
-  border-color: transparent #4a4a4a transparent transparent;
-  transform: translateY(-50%);
-}
-
-.timeline-event:nth-child(even) .timeline-content {
-  margin-right: 2rem;
-}
-
-.timeline-event:nth-child(even) .timeline-content::after {
-  top: 50%;
-  right: -15px;
-  border-width: 10px 0 10px 15px;
-  border-color: transparent transparent transparent #4a4a4a;
-  transform: translateY(-50%);
-}
-
-.timeline-date {
+.timeline-content .timeline-date {
   font-weight: bold;
+  font-size: 1rem;
   color: #7bff00;
-  font-size: 1.1rem;
   margin-bottom: 0.5rem;
 }
 
-.timeline-content:hover {
-  background-color: #5c5c5c;
-  transform: scale(1.05);
-  transition: all 0.3s ease;
+/* Расположение контента */
+.timeline-event:nth-child(odd) .timeline-content {
+  margin-left: 55%;
 }
 
-/* Заголовок и подзаголовок */
-h1 {
-  font-size: 2.5rem;
-  color: #7bff00;
-  text-align: center;
+.timeline-event:nth-child(even) .timeline-content {
+  margin-right: 55%;
+  text-align: right;
 }
 
-p.subtitle {
-  text-align: center;
-  font-size: 1.2rem;
-  color: #d1d1d1;
-  margin-bottom: 2rem;
+.timeline-event:nth-child(odd) .timeline-point {
+  left: 47.5%;
+}
+
+.timeline-event:nth-child(even) .timeline-point {
+  left: 52.5%;
 }
