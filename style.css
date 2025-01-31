@@ -544,28 +544,33 @@ img {
 
 
 
-
-
-
-
-    .product-info__copy {
-      width: 40%;
-      margin: 0 auto;
-      line-height: 1.8;
-      font-size: 1rem;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zakharov.Day Timeline</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      font-family: 'Raleway', sans-serif;
+      background-color: #3b3b3b;
+      color: #ececec;
     }
 
     .timeline {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       position: relative;
       margin: 2rem auto;
-      padding: 0;
-      width: 60%;
+      width: 80%;
     }
 
     .timeline::before {
       content: '';
       position: absolute;
-      width: 2px;
+      width: 4px;
       background-color: #7bff00;
       top: 0;
       bottom: 0;
@@ -575,8 +580,9 @@ img {
 
     .timeline-event {
       display: flex;
+      align-items: center;
       margin: 2rem 0;
-      position: relative;
+      width: 100%;
     }
 
     .timeline-event:nth-child(odd) {
@@ -587,61 +593,48 @@ img {
       justify-content: flex-end;
     }
 
-    .timeline-event .event-content {
+    .timeline-content {
       background-color: #4a4a4a;
-      color: #fff;
-      padding: 1rem;
+      padding: 1rem 1.5rem;
       border-radius: 10px;
       width: 45%;
       position: relative;
     }
 
-    .timeline-event .event-content::after {
+    .timeline-content::after {
       content: '';
       position: absolute;
-      top: 50%;
       width: 0;
       height: 0;
       border-style: solid;
-      transform: translateY(-50%);
     }
 
-    .timeline-event:nth-child(odd) .event-content {
+    .timeline-event:nth-child(odd) .timeline-content {
       margin-left: 2rem;
     }
 
-    .timeline-event:nth-child(odd) .event-content::after {
-      right: 100%;
-      border-width: 10px 10px 10px 0;
-      border-color: transparent #4a4a4a transparent transparent;
-    }
-
-    .timeline-event:nth-child(even) .event-content {
-      margin-right: 2rem;
-    }
-
-    .timeline-event:nth-child(even) .event-content::after {
-      left: 100%;
-      border-width: 10px 0 10px 10px;
-      border-color: transparent transparent transparent #4a4a4a;
-    }
-
-    .timeline-event .event-date {
-      position: absolute;
+    .timeline-event:nth-child(odd) .timeline-content::after {
       top: 50%;
-      font-weight: bold;
-      font-size: 0.9rem;
-      color: #7bff00;
+      left: -15px;
+      border-width: 10px 15px 10px 0;
+      border-color: transparent #4a4a4a transparent transparent;
       transform: translateY(-50%);
     }
 
-    .timeline-event:nth-child(odd) .event-date {
-      right: 60%;
+    .timeline-event:nth-child(even) .timeline-content {
+      margin-right: 2rem;
     }
 
-    .timeline-event:nth-child(even) .event-date {
-      left: 60%;
+    .timeline-event:nth-child(even) .timeline-content::after {
+      top: 50%;
+      right: -15px;
+      border-width: 10px 0 10px 15px;
+      border-color: transparent transparent transparent #4a4a4a;
+      transform: translateY(-50%);
     }
 
-
-
+    .timeline-date {
+      font-weight: bold;
+      color: #7bff00;
+      margin-bottom: 0.5rem;
+    }
