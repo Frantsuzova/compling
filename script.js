@@ -27,13 +27,15 @@ $(document).ready(function() {
   }).on('beforeChange', function(event, slick, currentSlide, nextSlide) {
       setColorClass(slick, nextSlide);
   });
+
+  
 });
 
 
 
 document.addEventListener("DOMContentLoaded", function () {
   const width = 700;
-  const height = 540;
+  const height = 500;
 
  
 
@@ -94,7 +96,7 @@ document.addEventListener("DOMContentLoaded", function () {
       .force(
           "link",d3.forceLink(links)
 .id((d) => d.id)
-.distance(120)
+.distance(90)
 )
 .force("charge", d3.forceManyBody().strength(-100)) // Слабое отталкивание
 .force("center", d3.forceCenter(width / 3, height / 3)) // Центральное притяжение
