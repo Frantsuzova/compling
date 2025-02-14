@@ -40,10 +40,37 @@ img {
   }
 }
 
-.container {
-  max-width: 63.125rem;
-  margin: 0 auto;
+.content {
+  margin-left: 30px;
+  max-height: 500px;
+  max-width: 80rem;
+  /*margin: 0 auto;*/
 }
+
+/* Для устройств с шириной меньше 1280px */
+@media (max-width: 1280px) {
+  .content {
+    max-width: 95%; /* Уменьшаем ширину до 95% от доступной ширины */
+    margin-left: 20px;
+  }
+}
+
+/* Для планшетов */
+@media (max-width: 768px) {
+  .content {
+    max-width: 95%; /* Уменьшаем ширину до 95% от доступной ширины */
+    margin-left: 10px;
+  }
+}
+
+/* Для мобильных устройств */
+@media (max-width: 480px) {
+  .content {
+    margin-left: 5px;
+    max-width: 95%; /* Уменьшаем ширину до 95% от доступной ширины */
+  }
+}
+
 .srt {
   position: absolute;
   height: 1px;
@@ -55,7 +82,7 @@ img {
 }
 .button {
   display: inline-block;
-  padding: 0.75em 1.25em 0.75em 0;
+  padding: 0.75em 1.25em 0.75em 0; /* Стандартные отступы */
   position: relative;
   overflow: hidden;
   text-decoration: none;
@@ -64,6 +91,20 @@ img {
   font-size: 0.875rem;
   text-transform: uppercase;
 }
+
+/* Медиа-запрос для мобильных устройств */
+@media (max-width: 768px) {
+  .button {
+    padding: 0.5em 0.75em 0.5em 0; /* Уменьшенные отступы для мобильных устройств */
+  }
+}
+
+@media (max-width: 480px) {
+  .button {
+    padding: 0.25em 0.5em 0.25em 0; /* Еще более уменьшенные отступы для очень маленьких экранов */
+  }
+}
+
 .button:hover:before {
   border-bottom-color: #fc595a;
 }
@@ -151,8 +192,30 @@ img {
   align-items: center;
   text-align: right;
 }
-.site-nav__item {
+
+.site-nav{
+  padding-top: 10px;
+  padding-bottom: 20px;
+}
+/* Стандартные стили для элементов навигации, исключая последний элемент */
+.site-nav__item:not(:last-child) {
   padding-right: 2rem;
+}
+
+/* Медиа-запросы для адаптации стилей на мобильных устройствах */
+@media (max-width: 768px) {
+  .site-nav__item:not(:last-child) {
+    padding-right: 1rem; /* Уменьшенный отступ для планшетов */
+  }
+}
+
+@media (max-width: 480px) {
+  .site-nav__item:not(:last-child) {
+    padding-right: 0.5rem; /* Еще меньший отступ для мобильных телефонов */
+  }
+}
+
+.site-nav__item {
   text-decoration: none;
   color: #a8a8a8;
   font-weight: 700;
@@ -253,26 +316,63 @@ img {
   margin-bottom: 0.5rem; 
   width: 35%;
 }
+
 .upper-landing__header h2 {
   margin: 0 0 3.625rem 0;
   font-size: 3rem;
   font-weight: 300;
   line-height: 1.3;
 }
+
+/* Стили для заголовков и подзаголовков в .upper-landing__info на различных устройствах */
+@media (max-width: 768px) {
+  .upper-landing__info h2 {
+    font-size: 2.2rem; /* Дополнительное уменьшение размера шрифта заголовков для планшетов */
+  }
+  .upper-landing__subtitle, .upper-landing__subtitle p {
+    font-size: 11px; /* Дополнительное уменьшение размера шрифта подзаголовков для планшетов */
+  }
+}
+
+@media (max-width: 480px) {
+  .upper-landing__info h2 {
+    font-size: 1.8rem; /* Еще большее уменьшение размера шрифта заголовков для мобильных устройств */
+  }
+  .upper-landing__subtitle, .upper-landing__subtitle p {
+    font-size: 9px; /* Еще большее уменьшение размера шрифта подзаголовков для мобильных устройств */
+  }
+}
+
+
+
+
 .upper-landing__subtitle {
   font-size: 14px;
   margin-bottom: 2.8125rem;
   padding-left: 2rem;
   line-height: 1.9;
   border-left: 1px solid #6f6f6f;
+  
+}
+@media (max-width: 768px) {
+  .upper-landing__subtitle {
+    display: none; /* Скрываем блок на устройствах с шириной экрана меньше 768px */
+  }
 }
 .event-date {
   font-size: 14px;
 }
+
 .upper-landing__cta,
 .upper-landing__slideshow {
   width: 55%;
   padding-left: 10px;
+}
+@media (max-width: 768px) {
+  .upper-landing__cta {
+    width: 75%;
+    padding-left: 0;
+  }
 }
 .upper-landing__slideshow-controls {
   display: flex;
@@ -312,6 +412,7 @@ img {
   cursor: pointer;
 }
 .mid-landing {
+  
   padding-top: 2.8125rem;
   background-color: #fff;
 }
@@ -547,7 +648,8 @@ img {
   width: 100%;
   height: 60vh; /* Задаём высоту графа в 50% от высоты экрана */
   margin-top: 3rem; /* Отступ сверху */
-  z-index: 1; /* Граф ниже текста */
+  position: relative; /* Или absolute, в зависимости от вашего макета */
+  z-index: 10; /* Значение выше, чем у других перекрывающихся элементов */
 
   display: flex;
   align-items: center;
@@ -558,6 +660,15 @@ img {
   width: 100%; /* Занимает всю доступную ширину */
   height: auto; /* Высота подстраивается под содержимое */
   margin-top: 20px; /* Отступ для разделения контента */
+}
+
+/* Скрываем граф на мобильных устройствах */
+@media (max-width: 768px) {
+  #connected-graph {
+    /*display: none;*/
+  }
+
+
 }
 
 
