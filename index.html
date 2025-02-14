@@ -17,7 +17,9 @@
     <section class="site-header__actions">
       <nav class="site-nav">
         <a href="#dates" class="site-nav__item"><span>Important Dates</span></a>
+        <!--
         <a href="#prints" class="site-nav__item"><span>Our Journals</span></a>
+        -->
         <a href="#contact" class="site-nav__item"><span>Contact us</span></a>
       </nav>
     </section>
@@ -29,7 +31,7 @@
     <div class="upper-landing__colophon">
       <!--вертикальный текст-->
       <div class="tagline">
-        International Seminar. <span style="color: yellow;"> 2025 Season</span>
+        International Seminar. <span style="color: rgb(0, 166, 255);"> 2025 Season</span>
       </div>
       <!--конец вертикальный текст-->
       
@@ -63,104 +65,94 @@
       </div>
      
       <div class="upper-landing__cta">
-        <a href="#0" class="button">take part</a>
+        <a href="https://ims.itmo.ru/compling-eng.html" class="button">take part</a>
       </div>
  
     </div>
     <!--конец заголовок и слоган и CTA-->
 
     <!--слайдер событий-->
-    <div class="upper-landing__slideshow">
-
-      <div class="landing-slideshow" id="landing-slideshow">
-        
-        <div class="landing-slideshow__slide" data-color-class="compling">
-          <h2>CompLing Seminar</h2>
-          <div class="event-date">June 23-26, 2025</div>
-          <div class="slide-line compling-line"></div>
-          <div class="content">
-
-            <div class="text-zone">
-              <p>CompLing-2025 seminar explores cutting-edge research in computational linguistics, 
-              NLP, and AI, fostering collaboration between researchers and industry to drive innovation and interdisciplinary exchange.</p>
+    <div class="intro-section">
+      <div class="upper-landing__slideshow">
+        <div class="landing-slideshow" id="landing-slideshow">
+          <!-- Slide 1 -->
+          <div class="landing-slideshow__slide" data-color-class="compling">
+            <h2>CompLing Seminar</h2>
+            <div class="event-date">June 23-26, 2025</div>
+            <div class="slide-line compling-line"></div>
+            
+            <div class="contentland">
+              <div class="text-zone">
+                <p>CompLing-2025 seminar explores cutting-edge research in computational linguistics, NLP, and AI, fostering collaboration between researchers and industry to drive innovation and interdisciplinary exchange.</p>
+              </div>
+              
             </div>
-            <div class="graph-container"> <!-- Новый контейнер для графа -->
-              <div id="connected-graph"></div>
-              <div id="word-cloud"></div> <!-- Новое облако слов -->
-
-            </div>
-           
-          </div>
-        </div>
-        
-        <div class="landing-slideshow__slide" data-color-class="zakharov">
-          <h2>Zakharov.day</h2>
-          <div class="event-date">March 13, 2025</div>
-          <div class="slide-line zakharov-line"></div>
-          <p>The meetup dedicated to the issues of automatic text processing, the creation and application of corpus resources, 
-            and continuing the research traditions established by the founder of the St. Petersburg School of Corpus Linguistics, V.P. Zakharov.
-            </p>
-        </div>
-
-        <div class="landing-slideshow__slide" data-color-class="textmining">
-          <h2>TextMining.day</h2>
-          <div class="event-date">September 7, 2025</div>
-          <div class="slide-line textmining-line"></div>
-          <div class="content">
-            <div class="text-zone">
-              <p>Which intersection of entities will you choose for your project? 
-                Let's piece the puzzle together and explore areas like sentiment analysis,
-                 semantic modeling, and other methods we use to uncover meaning in texts.</p>
-            </div>
-            <div id="venn-chart" style="width: 800px; height: 400px; margin: auto;"></div>
           </div>
           
-        </div>
-        <div class="landing-slideshow__slide" data-color-class="llm">
-          <h2>LLM.day</h2>
-          <div class="event-date">December 23, 2025</div>
-          <div class="slide-line llm-line"></div>
-          <div class="content">
-            <div class="text-zone">
-              <p>What challenges do we face in building large language models? 
-                From managing massive datasets to tackling high fine-tuning costs and addressing data privacy concerns, 
-                creating your own LLM is no small feat. Join us to discuss these hurdles and discover how 
-                LLMs are transforming the way we approach AI across industries.</p>
-
+          <!-- Slide 2 -->
+          <div class="landing-slideshow__slide" data-color-class="zakharov">
+            <h2>Zakharov.day</h2>
+            <div class="event-date">March 13, 2025</div>
+            <div class="slide-line zakharov-line"></div>
+            <div class="contentland">
+              <div class="text-zone">
+                <p>The meetup dedicated to the issues of automatic text processing, the creation and application of corpus resources, and continuing the research traditions established by the founder of the St. Petersburg School of Corpus Linguistics, V.P. Zakharov.</p>
+              </div>
+             
             </div>
-            <div id="llm-interactive-brain" style="width: 800px; height: 500px; margin: auto;"></div>
           </div>
+      
+          <!-- Slide 3 -->
+          <div class="landing-slideshow__slide" data-color-class="textmining">
+            <h2>TextMining.day</h2>
+            <div class="event-date">September 7, 2025</div>
+            <div class="slide-line textmining-line"></div>
+            <div class="contentland">
+              <div class="text-zone">
+                <p>Which intersection of entities will you choose for your project? Let's piece the puzzle together and explore areas like sentiment analysis, semantic modeling, and other methods we use to uncover meaning in texts.</p>
+              </div>
+            </div>
+          </div>
+      
+          <!-- Slide 4 -->
+          <div class="landing-slideshow__slide" data-color-class="llm">
+            <h2>LLM.day</h2>
+            <div class="event-date">December 23, 2025</div>
+            <div class="slide-line llm-line"></div>
+            <div class="contentland">
+              <div class="text-zone">
+                <p>What challenges do we face in building large language models? From managing massive datasets to tackling high fine-tuning costs and addressing data privacy concerns, creating your own LLM is no small feat. Join us to discuss these hurdles and discover how LLMs are transforming the way we approach AI across industries.</p>
+              </div>
+            </div>
+          </div>
+        </div>
 
-        </div>
-        
-        
-        <!-- /__slide -->
-      </div>
-      <!-- /.landing-slideshow -->
-      <div class="upper-landing__slideshow-controls">
-        <div class="slideshow-dots"></div>
-        <!-- /.slideshow-dots -->
-        <div class="slideshow-arrows">
-          <div class="slideshow-arrows__prev" id="ul-prev">
-            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/6791/braun-left-arrow.png" alt="Previous Slide">
+        <div id="connected-graph"></div>
+      
+        <div class="upper-landing__slideshow-controls">
+          <div class="slideshow-dots"></div>
+          <div class="slideshow-arrows">
+            <div class="slideshow-arrows__prev" id="ul-prev">
+              <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/6791/braun-left-arrow.png" alt="Previous Slide">
+            </div>
+            <div class="slideshow-arrows__next" id="ul-next">
+              <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/6791/braun-right-arrow.png" alt="Next Slide">
+            </div>
           </div>
-          <!-- /__prev -->
-          <div class="slideshow-arrows__next" id="ul-next">
-            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/6791/braun-right-arrow.png" alt="Next Slide">
-          </div>
-          <!-- /__next -->
         </div>
-        <!-- /.slideshow-arrows -->
       </div>
-      <!-- /__slideshow-controls -->
-    </div>
-    <!-- /__slideshow -->
+      
+
+
     
     
+  </div>
+  
   </section>
 
 
   <section class="mid-landing">
+    <!--
     <div class="container">
       <div class="mid-landing__cta-row">
           <section class="learn-more-card">
@@ -230,9 +222,9 @@
                 </a>
             </section>
       </div>
-      <!-- /__cta-row -->
+      -->
     </div>
-    <!-- /.container -->
+    
     <div class="mid-landing__product-row" id="dates">
       <div class="product-info">
         <h2 class="product-info__title">Mission of the Seminar</h2>
@@ -241,21 +233,40 @@
           and modern AI methods like machine learning and NLP, the seminar fosters innovation, 
           collaboration, and a deeper understanding of language and algorithms working together. 
           <br />
-          The main gathering takes place in June, complemented by three key meetups throughout the year: 
+          The main gathering takes place in <b>June</b>, complemented by three key meetups throughout the year: 
           on large language models, text mining, and Zakharov Day. 
+          <br />
           Our target audience includes linguists, data scientists, and industry professionals working with language processing and understanding technologies.        </div>
         <div class="product-info__cta">
-          <a href="#0" class="button--alternate">Register for the Next Event</a>
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSds-QkpbsdlcYjX2oAiJhkXej3b5BerKstOffT52E2Sk1Lbwg/viewform?usp=header" class="button--alternate">Register for the Next Event</a>
         </div>
       </div>
-      <!-- /.product-info -->
+
+
       <div class="timeline">
-  <h1 class="timeline-title">Zakharov.Day</h1>
-  <p class="timeline-subtitle">
-    The meetup will kick off with two keynote presentations: Speaker X will delve into... and Speaker Y will explore... 
-    Additional 3-minute lightning talks featuring early-stage research are welcome!
-  </p>
-  <div class="timeline-line"></div>
+      <h1 class="timeline-title">Zakharov.Day</h1>
+      <p class="timeline-subtitle">
+        The meetup will kick off with two keynote presentations. 
+        Additionally, we invite you to submit proposals for 3-minute lightning talks focused on early-stage research.
+      </p>
+      <div class="timeline-details">
+        <p>
+          These lightning talks are a great platform for sharing:
+        </p>
+        <ul>
+          <li>Initial Findings: Early results and data from ongoing research.</li>
+          <li>Experimental Overviews: Insights into the design and methodology of experiments.</li>
+          <li>Hypothesis Presentations: Theoretical frameworks and hypotheses being tested.</li>
+          <li>Innovative Concepts: New ideas and approaches in the field of linguistics and AI.</li>
+        </ul>
+        <p>
+          This is a fantastic opportunity to engage with peers, gain feedback, and further refine your research based on the community's input.
+        </p>
+        <p class="timeline-subtitle">Our timeline:</p>
+      </div>
+      
+      
+
   <div class="timeline-event">
     <div class="timeline-point"></div>
     <div class="timeline-content">
