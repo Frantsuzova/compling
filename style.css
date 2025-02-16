@@ -378,10 +378,12 @@ img {
   cursor: pointer;
 }
 .mid-landing {
-  
+  display: flex;
   padding-top: 2.8125rem;
   background-color: #fff;
 }
+
+
 .mid-landing__cta-row {
   display: flex;
   justify-content: space-between;
@@ -389,13 +391,41 @@ img {
 }
 .mid-landing__product-row {
   display: flex;
+  flex-direction: row; /* По умолчанию элементы расположены в ряд */
+  justify-content: space-between; /* Распределение элементов с пробелами по краям */
+  align-items: center;
 }
+
+@media (max-width: 768px) {
+  .mid-landing__product-row  {
+    flex-direction: column; /* Элементы теперь расположены в колонку */
+    align-items: stretch; /* Растягиваем элементы, чтобы занимали всю доступную ширину */
+  }
+}
+
+
+
 .mid-landing__product-row .product-info,
 .mid-landing__product-row .product-photo {
   width: 50%;
 }
 .mid-landing__product-row .product-info {
   padding: 0 7rem;
+}
+@media (max-width: 768px) {
+  .mid-landing__product-row .product-info {
+    padding: 0 4rem; /* Уменьшенный паддинг для планшетов */
+    width: 100%;
+    margin-bottom: 8px;
+  }
+}
+
+/* Медиа-запросы для мобильных устройств */
+@media (max-width: 480px) {
+  .mid-landing__product-row .product-info {
+    padding: 0 10px; /* Минимальный паддинг для мобильных телефонов */
+    width: 100%;
+  }
 }
 .mid-landing__product-row .product-info__title {
   margin-bottom: 2.75rem;
@@ -676,9 +706,12 @@ img {
 /* Заголовок и подзаголовок */
 .timeline-title {
   font-size: 2.5rem;
-  color: #7bff00; /* Зеленый цвет */
+  color: #7bff00; /* Пример зеленого цвета, как у кнопки */
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5); /* Добавляем зеленую светящуюся тень для увеличения яркости */
   text-align: center;
   margin-bottom: 1rem;
+
+
 }
 
 .timeline-subtitle {
@@ -688,32 +721,86 @@ img {
   line-height: 1.5;
 }
 
-/* Стилизация списка в блоке timeline-details */
-.timeline-details ul {
-  list-style: none; /* Убираем маркеры списка */
-  padding-top: 10px;
-  margin: 0 0 20px 20px; /* Небольшой отступ снизу и слева */
+.styled-list {
+  list-style: none; /* Убираем стандартные маркеры */
+  padding: 0;
 }
 
-.timeline-details li {
-  padding-left: 10px; /* Отступ для текста элементов списка */
-  margin-bottom: 10px; /* Отступ между элементами списка */
-  position: relative; /* Для позиционирования псевдо-элементов */
-  font-size: 0.875rem; /* Размер шрифта элементов списка */
-  line-height: 1.6; /* Высота строки */
+.styled-list li {
+  position: relative;
+  padding-left: 50px; /* Отступ для текста, чтобы не налезать на иконку */
+  margin-bottom: 20px; /* Расстояние между элементами списка */
+  line-height: 1.6;
+  font-size: 16px;
 }
 
-.timeline-details li:before {
-  content: ''; /* Псевдо-элемент для кастомного маркера */
+.styled-list li:before {
+  content: '';
   position: absolute;
   left: 0;
   top: 50%;
-  width: 6px;
-  height: 6px;
-  background-color: #7bff00; /* Цвет фона маркера */
-  border-radius: 50%; /* Делаем маркер круглым */
-  transform: translateY(-50%); /* Центрируем маркер по вертикали */
+  transform: translateY(-50%);
+  width: 20px; /* Ширина линии */
+  height: 2px; /* Толщина линии */
+  background-color: #7bff00; /* Зеленый цвет линии */
 }
+
+.styled-list li:after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%) translateX(-10px); /* Смещаем налево от начала текста */
+  width: 20px;
+  height: 20px;
+  background-color: #7bff00; /* Зеленый цвет окружности */
+  border-radius: 50%; /* Делаем окружность */
+}
+
+.custom-list {
+  list-style: none; /* Убираем стандартные маркеры */
+  padding: 0;
+  margin: 20px 0;
+}
+
+.custom-list li {
+  position: relative;
+  padding-left: 100px; /* Оставляем место для круга и соединительной линии */
+  margin-bottom: 20px; /* Расстояние между элементами */
+  line-height: 1.6;
+  background-color: #00ff00; /* Зелёный цвет фона */
+  color: white; /* Цвет текста */
+  padding: 10px 20px;
+  border-radius: 20px; /* Скругление углов прямоугольника */
+}
+
+.custom-list li:before {
+  content: '';
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  background-color: #fff; /* Белый цвет окружности */
+  border-radius: 50%; /* Делаем окружность */
+  z-index: 2;
+}
+
+.custom-list li:after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 35px; /* Начальная точка линии относительно круга */
+  width: 20px; /* Длина линии */
+  height: 2px; /* Толщина линии */
+  background-color: #fff; /* Цвет линии */
+  z-index: 1;
+}
+
+
+
+
 
 /* Адаптивные стили для меньших устройств */
 @media (max-width: 768px) {

@@ -100,7 +100,7 @@ document.addEventListener("DOMContentLoaded", function () {
 .distance(90)
 )
 .force("charge", d3.forceManyBody().strength(-100)) // Слабое отталкивание
-.force("center", d3.forceCenter(width / 3, height / 3)) // Центральное притяжение
+.force("center", d3.forceCenter(width / 3, height / 2.5)) // Центральное притяжение
 .force(
 "attractToNLP",
 d3.forceRadial(200, width / 2, height / 4).strength((d) => {
