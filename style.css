@@ -769,7 +769,7 @@ img {
   margin-bottom: 20px; /* Расстояние между элементами */
   line-height: 1.6;
   background-color: #00ff00; /* Зелёный цвет фона */
-  color: white; /* Цвет текста */
+  color: rgb(45, 45, 45); /* Цвет текста */
   padding: 10px 20px;
   border-radius: 20px; /* Скругление углов прямоугольника */
 }
