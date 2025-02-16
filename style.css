@@ -284,6 +284,15 @@ img {
 }
 
 /* Стили для заголовков и подзаголовков в .upper-landing__info на различных устройствах */
+@media (max-width: 1170px) {
+  .upper-landing__info h2 {
+    font-size: 3.4rem; /* Дополнительное уменьшение размера шрифта заголовков для планшетов */
+  }
+  .upper-landing__subtitle, .upper-landing__subtitle p {
+    font-size: 11px; /* Дополнительное уменьшение размера шрифта подзаголовков для планшетов */
+  }
+}
+
 @media (max-width: 768px) {
   .upper-landing__info h2 {
     font-size: 2.2rem; /* Дополнительное уменьшение размера шрифта заголовков для планшетов */
@@ -410,15 +419,21 @@ img {
   width: 50%;
 }
 .mid-landing__product-row .product-info {
-  padding: 0 7rem;
+  padding: 9px 7rem;
 }
-@media (max-width: 768px) {
+@media (max-width: 1235px) {
   .mid-landing__product-row .product-info {
-    padding: 0 4rem; /* Уменьшенный паддинг для планшетов */
-    width: 100%;
-    margin-bottom: 8px;
+    padding: 9px 4rem; 
+
   }
 }
+@media (max-width: 1090px) {
+  .mid-landing__product-row .product-info {
+    padding: 20px 25px; 
+
+  }
+}
+
 
 /* Медиа-запросы для мобильных устройств */
 @media (max-width: 480px) {
@@ -505,6 +520,14 @@ img {
   position: relative;
   background: url("./bg.jpg") no-repeat center center/cover;
 }
+
+@media (max-width: 550px) {
+  .lower-landing {
+    background: #4a4a4a;
+  }
+
+}
+
 .lower-landing__heading {
   margin-bottom: 3rem;
   font-size: 2.25rem;
@@ -533,6 +556,13 @@ img {
   margin-left: auto;
   max-width: 31.25rem;
 }
+@media (max-width: 550px) {
+  .container {
+    margin-left: 10px;
+  }
+
+}
+
 
 .landing-slideshow__slide{
   width: 100%;
@@ -643,12 +673,16 @@ img {
   }
 }
 
-#connected-graph {
+.connected-graph {
   max-width: 600px;
   margin-top: 5px; /* Отступ сверху */
   display: flex;
   justify-content: right;
+
 }
+
+
+
 
 
 
@@ -697,7 +731,7 @@ img {
 .timeline {
   position: relative;
   max-width: 800px;
-  margin: 0 auto;
+  margin: 9px;
   padding: 20px;
   background-color: rgba(128, 128, 128, 0.1); /* Светлый серый фон */
   border-radius: 10px;
