@@ -503,7 +503,7 @@ img {
 .lower-landing {
   padding: 25rem 0;
   position: relative;
-  background: url("https://avatars.mds.yandex.net/i?id=8c1d8d435819ade0d35c5e1fa76e960c_l-5233169-images-thumbs&n=13") no-repeat center center/cover;
+  background: url("./bg.jpg") no-repeat center center/cover;
 }
 .lower-landing__heading {
   margin-bottom: 3rem;
@@ -709,7 +709,8 @@ img {
   color: #7bff00; /* Пример зеленого цвета, как у кнопки */
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5); /* Добавляем зеленую светящуюся тень для увеличения яркости */
   text-align: center;
-  margin-bottom: 1rem;
+  margin: 0;
+  padding-bottom: 9px;
 
 
 }
@@ -721,85 +722,28 @@ img {
   line-height: 1.5;
 }
 
-.styled-list {
-  list-style: none; /* Убираем стандартные маркеры */
-  padding: 0;
-}
-
-.styled-list li {
-  position: relative;
-  padding-left: 50px; /* Отступ для текста, чтобы не налезать на иконку */
-  margin-bottom: 20px; /* Расстояние между элементами списка */
-  line-height: 1.6;
-  font-size: 16px;
-}
-
-.styled-list li:before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 20px; /* Ширина линии */
-  height: 2px; /* Толщина линии */
-  background-color: #7bff00; /* Зеленый цвет линии */
-}
-
-.styled-list li:after {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%) translateX(-10px); /* Смещаем налево от начала текста */
-  width: 20px;
-  height: 20px;
-  background-color: #7bff00; /* Зеленый цвет окружности */
-  border-radius: 50%; /* Делаем окружность */
-}
 
 .custom-list {
   list-style: none; /* Убираем стандартные маркеры */
   padding: 0;
-  margin: 20px 0;
+  margin-top: 20px;
+  margin-left: 0;
 }
 
 .custom-list li {
   position: relative;
-  padding-left: 100px; /* Оставляем место для круга и соединительной линии */
+  padding-right: 30px;
   margin-bottom: 20px; /* Расстояние между элементами */
   line-height: 1.6;
-  background-color: #00ff00; /* Зелёный цвет фона */
+  background-color: #7bff00; /* Зелёный цвет фона */
   color: rgb(45, 45, 45); /* Цвет текста */
   padding: 10px 20px;
   border-radius: 20px; /* Скругление углов прямоугольника */
 }
 
-.custom-list li:before {
-  content: '';
-  position: absolute;
-  left: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 20px;
-  height: 20px;
-  background-color: #fff; /* Белый цвет окружности */
-  border-radius: 50%; /* Делаем окружность */
-  z-index: 2;
+.custom-list li:hover {
+  transform: scale(1.05); /* Увеличение размера элемента при наведении */
 }
-
-.custom-list li:after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 35px; /* Начальная точка линии относительно круга */
-  width: 20px; /* Длина линии */
-  height: 2px; /* Толщина линии */
-  background-color: #fff; /* Цвет линии */
-  z-index: 1;
-}
-
-
-
 
 
 /* Адаптивные стили для меньших устройств */
@@ -825,6 +769,11 @@ img {
   position: relative;
   margin: 2rem 0;
 }
+
+.timeline-event:hover {
+  transform: scale(1.05); /* Увеличение размера элемента при наведении */
+}
+
 
 .timeline-point {
   position: absolute;
