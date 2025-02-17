@@ -156,7 +156,7 @@ img {
 .site-nav{
   padding-top: 30px;
   padding-bottom: 20px;
-  padding-right: 5px;
+  padding-right: 11px;
 }
 /* Стандартные стили для элементов навигации, исключая последний элемент */
 .site-nav__item:not(:last-child) {
@@ -771,7 +771,7 @@ img {
   background-color: #7bff00; /* Зелёный цвет фона */
   color: rgb(45, 45, 45); /* Цвет текста */
   padding: 10px 20px;
-  border-radius: 20px; /* Скругление углов прямоугольника */
+  border-radius: 10px; /* Скругление углов прямоугольника */
 }
 
 .custom-list li:hover {
