@@ -457,11 +457,7 @@ img {
   border-left: 1px solid #cecfd0;
 }
 
-.mid-landing__product-row .product-photo {
-  height: 0;
-  padding-bottom: 50%;
-  background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/6791/braun-product.png") no-repeat center center/cover;
-}
+
 .learn-more-card {
   width: 25%;
 }
