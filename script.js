@@ -84,9 +84,8 @@ document.addEventListener("DOMContentLoaded", function () {
   const svg = d3
       .select("#connected-graph")
       .append("svg")
-      .attr("viewBox", "0 0 800 400")
-      .style("background-color", "#3b3b3b")
-      .style("overflow", "hidden");
+      .attr("viewBox", "0 0 750 400")
+      .style("background-color", "#3b3b3b");
 
   // Симуляция
   const simulation = d3
