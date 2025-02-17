@@ -84,7 +84,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const svg = d3
       .select("#connected-graph")
       .append("svg")
-      .attr("viewBox", "0 0 850 400")
+      .attr("viewBox", "0 0 500 400")
       .style("background-color", "#3b3b3b")
       .style("overflow", "hidden");
 

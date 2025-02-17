@@ -420,6 +420,7 @@ img {
 }
 .mid-landing__product-row .product-info {
   padding: 9px 7rem;
+  /*margin-right: 7px;*/
 }
 @media (max-width: 1235px) {
   .mid-landing__product-row .product-info {
@@ -675,15 +676,8 @@ img {
 
 .connected-graph {
   max-width: 850px;
-  margin-top: 5px; /* Отступ сверху */
   display: flex;
   justify-content: right;
-  width: 100%;
-}
-.connected-graph svg {
-  width: 100%; 
-  height: auto;
- 
 }
 
 
