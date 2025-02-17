@@ -84,7 +84,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const svg = d3
       .select("#connected-graph")
       .append("svg")
-      .attr("viewBox", "0 0 500 400")
+      .attr("viewBox", "0 0 800 400")
       .style("background-color", "#3b3b3b")
       .style("overflow", "hidden");
 
@@ -220,14 +220,15 @@ function submitForm(event) {
 // Функция для отображения попапа
 function showPopup() {
     const popup = document.getElementById("popup-success");
-    popup.style.display = "block";
+    popup.classList.remove("hidden"); // Показываем попап
 }
 
 // Функция для закрытия попапа
 function closePopup() {
     const popup = document.getElementById("popup-success");
-    popup.style.display = "none";
+    popup.classList.add("hidden"); // Скрываем попап
 }
+
 
 // Функция для очистки данных формы
 function clearForm(form) {

@@ -129,10 +129,11 @@ img {
   text-decoration: none;
   font-weight: 700;
   transition: all 0.2s ease-in-out;
+  border-radius: 7px;
 }
 .button--white:hover {
   color: #fff;
-  background-color: #fc595a;
+  background-color: #00a2ff;
 }
 .site-header {
   display: flex;
@@ -903,6 +904,64 @@ img {
   .slideshow-arrows__next {
     width: 40%; /* Увеличиваем ширину для очень маленьких экранов */
   }
+}
+
+
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+
+.popup-content {
+  
+  width: 400px;
+  height: 400px;
+  background-color: rgb(62, 62, 62);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.popup-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+@media (max-width: 480px) {
+  .popup-content {
+    width: 300px; /* Уменьшенная ширина на мобильных устройствах */
+    height: 300px; /* Уменьшенная высота на мобильных устройствах */
+    padding: 15px; /* Меньший паддинг для сохранения пространства */
+  }
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  cursor: pointer;
+}
+.icon-container {
+  font-size: 48px; /* Увеличиваем размер иконки */
+  color: #4CAF50; /* Задаём цвет иконки, если нужно */
+  margin-bottom: 20px; /* Добавляем немного места между иконкой и текстом */
+}
+
+.hidden {
+  display: none;
 }
 
 
