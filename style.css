@@ -963,3 +963,24 @@ img {
 }
 
 
+.product-info__cta .button--alternate {
+}
+
+@media (max-width: 768px) {
+  .product-info__cta .button--alternate {
+    display: none;  /* Скрывает кнопку в исходном блоке */
+  }
+
+
+}
+
+.product-info__mobcta .button--alternate {
+  display: none; 
+}
+
+@media (max-width: 768px) {
+  .product-info__mobcta .button--alternate {
+  
+    display: inline-block;  /* Показывает кнопку в конце таймлайна */
+  }
+}
