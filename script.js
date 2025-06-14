@@ -234,3 +234,31 @@ function clearForm(form) {
     form.reset(); // Метод reset() очищает все поля формы
 }
 
+document.addEventListener("DOMContentLoaded", () => {
+  const sessions = document.querySelectorAll(".session-block");
+  let current = 0;
+
+  function showSession(index) {
+    current = (index + sessions.length) % sessions.length; // оборачиваем по кругу
+    sessions.forEach((el, i) => {
+      el.classList.toggle("active", i === current);
+    });
+  }
+
+  showSession(current);
+
+  document.querySelectorAll(".session-nav.prev").forEach(btn =>
+    btn.addEventListener("click", () => {
+      showSession(current - 1);
+    })
+  );
+
+  document.querySelectorAll(".session-nav.next").forEach(btn =>
+    btn.addEventListener("click", () => {
+      showSession(current + 1);
+    })
+  );
+});
+
+
+

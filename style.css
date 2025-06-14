@@ -984,3 +984,121 @@ img {
     display: inline-block;  /* Показывает кнопку в конце таймлайна */
   }
 }
+
+
+.compling-program {
+  background-color: #f8f9fa;
+  padding: 4rem 1rem;
+  color: #1d1d1d;
+}
+
+.compling-program__title {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 3rem;
+  color: #00a2ff;
+}
+
+.program-slider {
+  position: relative;
+  min-height: 200px;
+}
+
+.session-block {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.session-block.active {
+  position: relative;
+  opacity: 1;
+  pointer-events: all;
+}
+
+.session-title {
+  font-size: 1.5rem;
+  color: #00a2ff;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.session-date-inline {
+  color: #777;
+  font-weight: normal;
+  font-size: 1rem;
+}
+
+.session-nav {
+  display: inline-block;
+  background: #e6f4ff;
+  border: 1px solid #00a2ff;
+  color: #007acc;
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.2s ease;
+}
+
+.session-nav:hover {
+  background: #d0ecff;
+}
+
+.talk-entry {
+  background: #f8fbff;
+  padding: 1.2em;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 50, 100, 0.1);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  margin-bottom: 1.2em;
+}
+
+.talk-entry:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 24px rgba(0, 162, 255, 0.35);
+}
+
+.talk-topic {
+  font-weight: bold;
+  color: #00a2ff;
+  margin-bottom: 0.3em;
+}
+
+.talk-speaker {
+  font-weight: normal;
+  color: #222;
+  margin-bottom: 0.1em;
+}
+
+.talk-affiliation {
+  font-style: italic;
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 0.3rem;
+}
+
+@media (max-width: 600px) {
+  .talk-entry {
+    padding: 1rem;
+    font-size: 0.95rem;
+  }
+
+  .session-title {
+    font-size: 1.2rem;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .session-nav {
+    align-self: flex-end;
+  }
+}
