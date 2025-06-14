@@ -65,7 +65,10 @@
       </div>
      
       <div class="upper-landing__cta">
-        <a href="https://ims.itmo.ru/compling-eng.html" class="button">take part</a>
+       <!-- 
+        <a href="#" class="button" id="take-part-btn">take part</a>
+        -->
+        <a href="#prog" class="button">Attend the seminar</a>
       </div>
  
     </div>
@@ -105,7 +108,7 @@
           <!-- Slide 3 -->
           <div class="landing-slideshow__slide" data-color-class="textmining">
             <h2>TextMining.day</h2>
-            <div class="event-date">September 7, 2025</div>
+            <div class="event-date">Date to be announced</div>
             <div class="slide-line textmining-line"></div>
             <div class="contentland">
               <div class="text-zone">
@@ -117,7 +120,7 @@
           <!-- Slide 4 -->
           <div class="landing-slideshow__slide" data-color-class="llm">
             <h2>LLM.day</h2>
-            <div class="event-date">December 23, 2025</div>
+            <div class="event-date">Date to be announced</div>
             <div class="slide-line llm-line"></div>
             <div class="contentland">
               <div class="text-zone">
@@ -150,7 +153,7 @@
   
   </section>
 
- <section class="compling-program">
+ <section class="compling-program" id="prog">
   <div class="container">
     <h2 class="compling-program__title">Program: Computational Linguistics Seminar</h2>
     <div class="program-slider">
@@ -281,8 +284,12 @@
   <div class="talk-entry"><div class="talk-topic">Do LLMs Understand Why We Write Diaries? A Method for Purpose Extraction and Clustering</div><div class="talk-speaker">Valeriya Goloviznina, Alexander Sergeev, Mikhail Melnichenko, Evgeny Kotelnikov</div><div class="talk-affiliation">European University at Saint Petersburg</div></div>
 </div>
 
-
-      <span class="session-nav prev">←</span><span class="session-nav next">→</span>
+      <h3 class="session-title">
+      <span class="session-nav prev">←</span>
+       Prev Session ↔ Next Session
+      
+      <span class="session-nav next">→</span>
+      </h3>
      
     </div>
   </div>
@@ -292,78 +299,8 @@
 
 
   <section class="mid-landing">
-    <!--
-    <div class="container">
-      <div class="mid-landing__cta-row">
-          <section class="learn-more-card">
-            <a href="#0">
-              <header>
-                  <h2 class="learn-more-card__title">CompLing Seminar</h2>
-              </header>
-              <div class="learn-more-card__copy">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              </div>
-              <footer>
-                  <div class="learn-more-card__line">
-                      <span class="line-component"></span><span class="line-component"></span><span class="line-component"></span>
-                  </div>
-                  <p href="#0" class="learn-more-card__cta">Learn More</p>
-              </footer>
-          </a>
-
-
-          </section>
-          <section class="learn-more-card">
-                <a href="#0">
-                    <header>
-                        <h2 class="learn-more-card__title">Zakharov.day</h2>
-                    </header>
-                    <div class="learn-more-card__copy">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                    </div>
-                    <footer>
-                        <div class="learn-more-card__line">
-                            <span class="line-component"></span><span class="line-component"></span><span class="line-component"></span>
-                        </div>
-                        <p href="#0" class="learn-more-card__cta">Learn More</p>
-                    </footer>
-                </a>
-            </section>
-            <section class="learn-more-card">
-                <a href="#0">
-                    <header>
-                        <h2 class="learn-more-card__title">TextMining.day</h2>
-                    </header>
-                    <div class="learn-more-card__copy">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                    </div>
-                    <footer>
-                        <div class="learn-more-card__line">
-                            <span class="line-component"></span><span class="line-component"></span><span class="line-component"></span>
-                        </div>
-                        <p href="#0" class="learn-more-card__cta">Learn More</p>
-                    </footer>
-                </a>
-            </section>
-            <section class="learn-more-card">
-                <a href="#0">
-                    <header>
-                        <h2 class="learn-more-card__title">LLM.day</h2>
-                    </header>
-                    <div class="learn-more-card__copy">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                    </div>
-                    <footer>
-                        <div class="learn-more-card__line">
-                            <span class="line-component"></span><span class="line-component"></span><span class="line-component"></span>
-                        </div>
-                        <p href="#0" class="learn-more-card__cta">Learn More</p>
-                    </footer>
-                </a>
-            </section>
-      </div>
-      -->
-    </div>
+    
+    
     
     <div class="mid-landing__product-row" id="dates">
       <div class="product-info">
@@ -375,21 +312,36 @@
           <br />
           The main gathering takes place in <b>June</b> within the framework of the international conference <a href="https://ims.itmo.ru/eng/" target="_blank">Internet and Modern Society (IMS–2025)</a>, St. Petersburg, Russia,
           complemented by three key meetups throughout the year: 
-          on large language models (<b>December</b>), text mining (<b>September</b>), and Zakharov Day (<b>March</b>). 
+          on large language models, text mining, and Zakharov Day (<b>March</b>). 
           <br />
           Our target audience includes linguists, data scientists, and industry professionals working with language processing and understanding technologies.        </div>
-        <div class="product-info__cta">
+          <!--
+          <div class="product-info__cta">
           <a href="https://docs.google.com/forms/d/e/1FAIpQLSds-QkpbsdlcYjX2oAiJhkXej3b5BerKstOffT52E2Sk1Lbwg/viewform?usp=header" class="button--alternate">Register for the Next Event</a>
         </div>
+        -->
       </div>
 
 
       <div class="timeline">
         <h1 class="timeline-title">Zakharov.Day</h1>
+        <!--
         <p class="timeline-subtitle">
           The meetup will take place online on <b>March 13, 2025</b>, and kick off with two keynote presentations by Margarita Kirina (HSE) on emotions in digital literature research and Olga Mitrofanova (SPbU) on creating text corpora for corpus and computational linguistics. 
           Additionally, we invite you to submit proposals for 10-minute lightning talks focused on early-stage research.
         </p>
+        -->
+        <div class="timeline-details" style="font-size: 1rem; line-height: 1.6;">
+          <p style="margin-bottom: 1em;">
+            <strong>The Zakharov.Day meetup took place online on March 13, 2025.</strong>
+            It featured keynote presentations by Margarita Kirina (HSE) on emotions in digital literature research and Olga Mitrofanova (SPbU) on building text corpora.
+          </p>
+          <p>
+            The program also included lightning talks showcasing early-stage research.
+         </p>
+        </div>
+
+        <!--
         <div class="timeline-details">
             <p>
               These lightning talks are a great platform for sharing:
@@ -427,23 +379,22 @@
             <p>the main meetup event</p>
           </div>
         </div>
-        <div class="product-info__mobcta">
-          <a href="https://docs.google.com/forms/d/e/1FAIpQLSds-QkpbsdlcYjX2oAiJhkXej3b5BerKstOffT52E2Sk1Lbwg/viewform?usp=header" class="button--alternate">Register for the Next Event</a>
+        -->
+        <div class="timeline-details">
+          <p style="margin-bottom: 1.2em;">You can now watch the keynote presentations from <b>Zakharov.Day</b>.
+          </p>
+          <a href="https://disk.yandex.ru/i/8gS2iWdx1HL1kg" target="_blank" rel="noopener" class="button--alternate">
+            🎥 Watch Recording
+          </a>
         </div>
-      </div>
+        <!--
+                <div class="product-info__mobcta">
+                  <a href="https://docs.google.com/forms/d/e/1FAIpQLSds-QkpbsdlcYjX2oAiJhkXej3b5BerKstOffT52E2Sk1Lbwg/viewform?usp=header" class="button--alternate">Register for the Next Event</a>
+                </div>
+              </div>
 
+        -->
 
-
-
-
-      
-      
-      <style>
-        .product-photo__placeholder {
-          width: 100%;
-          height: auto;
-        }
-      </style>
       
       
     </div>
@@ -492,14 +443,13 @@
 
             </div>
 
-            <!-- /.overlay-content -->
         </div>
     </div>
-    <!-- /.overlay -->
+
 </section>
 
 </main>
-<!-- partial -->
+
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
 <script src='https://cdn.jsdelivr.net/jquery.slick/latest/slick.min.js'></script><script  src="./script.js"></script>
 
