@@ -260,10 +260,10 @@ document.addEventListener("DOMContentLoaded", () => {
   );
 });
 
-document.getElementById("take-part-btn").addEventListener("click", function (e) {
-  e.preventDefault();
-  window.open("https://ims.itmo.ru/compling-eng.html", "_blank", "noopener,noreferrer");
-});
+//document.getElementById("take-part-btn").addEventListener("click", function (e) {
+  //e.preventDefault();
+  //window.open("https://ims.itmo.ru/compling-eng.html", "_blank", "noopener,noreferrer");
+//});
 
 
 
