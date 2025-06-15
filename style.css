@@ -606,7 +606,7 @@ img {
 /* Цвета для каждой тематической линии */
 .compling-line { background-color: #00a2ff; } /* Синий */
 .zakharov-line { background-color: #7bff00; } /* Зеленый */
-.textmining-line { background-color: #fffb00; } /* Желтый */
+.textmining-line { background-color: #ffa600; } /* Желтый */
 .llm-line { background-color: #ff007b; } /* Розовый */
 
 /* Стили для точек управления слайдером */
