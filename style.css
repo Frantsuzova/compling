@@ -352,9 +352,9 @@ img {
 
 .upper-landing__slideshow-controls {
   display: flex;
-  justify-content: flex-end;
-  align-items: right;
-  padding-right: 4rem;
+  align-items: center;
+  justify-content: end;
+  padding-right: 2rem;
 }
 .upper-landing__slideshow-controls .slick-dots {
   list-style: none;
@@ -389,6 +389,7 @@ img {
 }
 .mid-landing {
   display: flex;
+  justify-content: center;
   padding-top: 2.8125rem;
   background-color: #fff;
 }
@@ -406,8 +407,10 @@ img {
   align-items: center;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1010px) {
+  
   .mid-landing__product-row  {
+
     flex-direction: column; /* Элементы теперь расположены в колонку */
     align-items: stretch; /* Растягиваем элементы, чтобы занимали всю доступную ширину */
   }
@@ -417,7 +420,7 @@ img {
 
 .mid-landing__product-row .product-info,
 .mid-landing__product-row .product-photo {
-  width: 50%;
+  width: 90%;
 }
 .mid-landing__product-row .product-info {
   padding: 9px 7rem;
@@ -671,11 +674,20 @@ img {
   }
 }
 
-.connected-graph {
-  max-width: 850px;
-  display: flex;
-  justify-content: right;
+#connected-graph {
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden; /* на всякий случай, чтобы ничего не вылезало */
 }
+
+#connected-graph svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+
+
 
 
 
@@ -866,6 +878,7 @@ img {
 /* Медиа-запросы для мобильных устройств */
 @media (max-width: 480px) {
   .intro-section {
+   
     margin-left: 10px; /* Ещё меньше левый отступ */
     max-width: 200px; /* Позволяет блоку растягиваться на всю доступную ширину */
   }
@@ -874,29 +887,37 @@ img {
 /* Основные стили для стрелок */
 .slideshow-arrows__prev,
 .slideshow-arrows__next {
-  display: inline-block;
-  height: auto; /* Поддерживаем пропорции изображения */
+  width: clamp(28px, 6vw, 38px);
+  height: clamp(28px, 6vw, 38px);
+  margin-bottom: 20px;
+  margin-right: 10px;
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
 }
 
 /* Устанавливаем размеры изображения внутри кнопок стрелок */
 .slideshow-arrows__prev img,
 .slideshow-arrows__next img {
-  width: 100%; /* Заполняем полностью родительский элемент */
-  height: auto; /* Поддерживаем пропорции */
+  display: block;
 }
 
 /* Медиа-запросы для мобильных устройств */
 @media (max-width: 768px) {
   .slideshow-arrows__prev,
   .slideshow-arrows__next {
-    width: 60%w; /* Увеличиваем ширину на меньших экранах, если нужно более заметное отображение */
+    width: 48px;
+    height: 48px;
   }
 }
 
 @media (max-width: 480px) {
   .slideshow-arrows__prev,
   .slideshow-arrows__next {
-    width: 40%; /* Увеличиваем ширину для очень маленьких экранов */
+    width: 28px;
+    height: 28px;
   }
 }
 
