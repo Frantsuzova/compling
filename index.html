@@ -1,385 +1,732 @@
-<!DOCTYPE html>
-<html lang="en" >
+<!doctype html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
   <title>Seminar CompLing</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-  <link rel='stylesheet' href='https://cdn.jsdelivr.net/jquery.slick/latest/slick.css'><link rel="stylesheet" href="./style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+
+  <style>
+    :root{
+      --bg:#3f3f3f;
+      --fg:#eaeaea;
+      --muted:#cfcfcf;
+      --muted2:#9aa3ad;
+      --panel: rgba(40,44,50,.82);
+
+      --blue:#00A6FF;
+      --green:#2CA02C;
+      --orange:#DF7F3B;
+
+      --pad: clamp(16px, 3vw, 42px);
+      --radius: 18px;
+      --shadow: 0 18px 60px rgba(0,0,0,.35);
+
+      --railW: 58px;
+      --heroTop: 84px;
+    }
+
+    *{ box-sizing:border-box; }
+    html, body { height:100%; overflow-x:hidden; }
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+    }
+    a{ color: inherit; }
+    a:hover{ text-decoration: underline; }
+
+    /* ===== Left rail ===== */
+    .rail{
+      position: fixed;
+      left: 0;
+      top: var(--heroTop);
+      width: var(--railW);
+      height: calc(100vh - var(--heroTop));
+      z-index: 20;
+      display:flex;
+      align-items:flex-start;
+      justify-content:center;
+      pointer-events:none;
+    }
+    .rail__stack{
+      display:flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      pointer-events:auto;
+    }
+    .rail__label{
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      font-weight: 700;
+      letter-spacing: .3px;
+      font-size: 14px;
+      color: rgba(185,192,204,.90);
+      user-select:none;
+    }
+    .rail__label span{ color: var(--blue); font-weight: 800; }
+    .rail__mail{
+      width: 36px;
+      height: 36px;
+      border-radius: 999px;
+      display:grid;
+      place-items:center;
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(0,0,0,.16);
+      box-shadow: 0 10px 24px rgba(0,0,0,.25);
+      transition: transform .12s ease, opacity .12s ease;
+      text-decoration:none;
+    }
+    .rail__mail:hover{ transform: translateY(-1px); text-decoration:none; }
+    .rail__mail:active{ transform: translateY(0); opacity:.92; }
+    .rail__mail svg{ width: 18px; height: 18px; opacity: .9; }
+
+    /* ===== Top nav ===== */
+    .nav{
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      padding: 18px var(--pad);
+      margin-left: var(--railW);
+      background: linear-gradient(180deg, rgba(63,63,63,.96), rgba(63,63,63,0));
+      backdrop-filter: blur(2px);
+    }
+    .nav__inner{
+      display:flex;
+      justify-content:flex-end;
+      gap: 28px;
+      font-weight: 650;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .nav__inner a{
+      text-decoration:none;
+      color: var(--muted);
+    }
+    .nav__inner a:hover{ text-decoration: underline; }
+
+    /* ===== HERO ===== */
+    .hero{
+      margin-left: var(--railW);
+      padding: 18px var(--pad) 34px;
+      display:grid;
+      grid-template-columns: minmax(340px, 1fr) minmax(420px, 1fr);
+      grid-template-areas:
+        "title panel"
+        "sub   panel"
+        "cta   panel";
+      column-gap: clamp(18px, 3vw, 40px);
+      row-gap: 18px;
+      align-items:start;
+    }
+    .hero > *{ min-width:0; }
+
+    .utpTitle{ grid-area:title; max-width: 860px; }
+    .utpSub{ grid-area:sub; max-width: 760px; }
+    .utpCta{ grid-area:cta; max-width: 760px; }
+    .panel{ grid-area:panel; }
+
+    .utpTitle h1{
+      margin: 0;
+      font-weight: 300;
+      letter-spacing: .2px;
+      line-height: 1.06;
+      font-size: clamp(38px, 3.8vw, 64px);
+      color: #e7e7e7;
+      text-wrap: balance;
+    }
+
+    .subrow{
+      margin-top: clamp(10px, 2.2vw, 18px);
+      display:flex;
+      gap: 14px;
+      align-items:flex-start;
+      max-width: 640px;
+    }
+    .subrow .bar{
+      width: 2px;
+      height: 58px;
+      background: rgba(255,255,255,.18);
+      margin-top: 4px;
+      flex: 0 0 auto;
+    }
+    .subrow .txt{
+      font-size: 14px;
+      line-height: 1.55;
+      color: #d0d0d0;
+    }
+
+    .cta{
+      margin-top: 10px;
+      display:flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .cta-btn{
+      width: max-content;
+      background: transparent;
+      border: 0;
+      padding: 10px 0 8px;
+      cursor: pointer;
+      color: #e7e7e7;
+      font-weight: 850;
+      letter-spacing: .35px;
+      text-transform: uppercase;
+      font-size: 13px;
+      border-bottom: 2px solid var(--blue);
+      transition: transform .12s ease, opacity .12s ease;
+    }
+    .cta-btn:hover{ transform: translateY(-1px); }
+    .cta-btn:active{ transform: translateY(0px); opacity: .9; }
+    .cta-note{
+      font-size: 12px;
+      color: var(--muted2);
+    }
+
+    /* Right panel */
+    .panel{
+      width: 100%;
+      max-width: 100%;
+      background: var(--panel);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(255,255,255,.10);
+      padding: 18px 18px 14px;
+      display:flex;
+      flex-direction: column;
+      gap: 10px;
+      min-width:0;
+    }
+    .panel h2{
+      margin: 0;
+      font-size: 22px;
+      font-weight: 850;
+      color:#f0f0f0;
+    }
+    .panel .date{
+      margin-top: -2px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+    .panel .rule{
+      margin-top: 6px;
+      height: 2px;
+      width: 100%;
+      background: var(--blue);
+      opacity: .8;
+    }
+    .panel .desc{
+      margin-top: 4px;
+      font-size: 14px;
+      line-height: 1.55;
+      color: var(--muted);
+    }
+
+    .graphCard{
+      margin-top: 10px;
+      border-radius: calc(var(--radius) - 4px);
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,.10);
+      background: radial-gradient(900px 320px at 20% 20%, rgba(0,166,255,.10), transparent 60%),
+                  radial-gradient(900px 320px at 80% 80%, rgba(44,160,44,.08), transparent 60%),
+                  rgba(16,18,22,.35);
+      height: clamp(320px, 38vh, 420px);
+      position: relative;
+      max-width:100%;
+    }
+    .graphCard svg{
+      width:100%;
+      height:100%;
+      display:block;
+      touch-action:none;
+      max-width:100%;
+    }
+
+    .g-link{ stroke: rgba(190,200,210,.40); stroke-width: 1; }
+    .g-node{ cursor: grab; }
+    .g-node:active{ cursor: grabbing; }
+    .g-label{
+      font-size: 12px;
+      font-weight: 650;
+      fill: rgba(238,242,247,.95);
+      paint-order: stroke fill;
+      stroke: rgba(0,0,0,.70);
+      stroke-width: 4.2px;
+      stroke-linejoin: round;
+      pointer-events:none;
+      user-select:none;
+    }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 980px){
+      :root{ --heroTop: 76px; }
+
+      .hero{
+        grid-template-columns: 1fr;
+        grid-template-areas:
+          "title"
+          "panel"
+          "cta"
+          "sub";
+        row-gap: 16px;
+        padding-bottom: 46px;
+      }
+
+      /* REQUIRED: remove subtitle block from layout */
+      .utpSub{ display:none; }
+
+      .graphCard{
+        height: min(560px, 56vh);
+        min-height: 360px;
+      }
+    }
+
+    @media (max-width: 520px){
+      :root{
+        --railW: 46px;
+        --heroTop: 70px;
+      }
+      .nav{ padding: 14px var(--pad); }
+      .nav__inner{ gap: 16px; font-size: 13px; }
+      .g-label{ font-size: 11px; }
+    }
+
+    /* ===== Content sections ===== */
+    .section{
+      background:#fff;
+      color:#111;
+      padding: 64px var(--pad);
+      margin-left: var(--railW);
+      overflow-x: clip;
+    }
+
+    /* IMPORTANT: right column uses same min width logic as hero's right column */
+    .section__inner{
+      max-width: none;
+      margin: 0;
+      width: 100%;
+      display:grid;
+      grid-template-columns: 1fr minmax(420px, 1fr);
+      gap: 44px;
+      align-items: start;
+    }
+
+    .section h2{
+      margin:0 0 12px;
+      font-size: 28px;
+      font-weight: 850;
+    }
+
+    .copy{
+      margin:0;
+      color:#333;
+      line-height:1.6;
+      font-size: 15px;
+    }
+    .copy b{ color:#111; }
+
+    /* prevent mobile overflow for long links/words */
+    .copy,
+    .timeline-subtitle,
+    .timeline-content p,
+    .contact__copy{
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+
+    /* Styled link for reviewer form */
+    a.link-pill{
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+
+  padding: 4px 10px;
+  border-radius: 999px;
+
+  text-decoration: none;
+  font-weight: 800;
+
+  border: 1px solid rgba(0,0,0,.10);
+  background: rgba(0,166,255,.06);
+  color: #0b2233;
+
+  transform: translateY(-1px); /* чтобы сидела по строке */
+}
+
+a.link-pill:hover{
+  background: rgba(0,166,255,.10);
+  border-color: rgba(0,0,0,.12);
+  text-decoration: none;
+}
+
+a.link-pill:active{ opacity:.92; }
+
+
+    @media (max-width: 520px){
+    a.link-pill{
+        display: inline;
+        padding: 0;
+        border: 0;
+        background: transparent;
+        border-radius: 0;
+        font-weight: 800;
+        color: var(--blue);
+        text-decoration: underline;
+        text-underline-offset: 3px;
+    }
+    }
+
+    /* Zakharov box */
+    .timeline{
+      width: 100%;
+      background: #f6f6f6;
+      border-radius: 18px;
+      padding: 22px 22px 18px;
+      border: 1px solid rgba(0,0,0,.08);
+      max-width: 100%;
+    }
+    .timeline-title{
+      margin:0;
+      font-size: 40px;
+      line-height: 1.05;
+      letter-spacing:.2px;
+      color: #2bbf3b;
+    }
+    .timeline-subtitle{
+      margin: 12px 0 0;
+      color:#333;
+      line-height:1.6;
+      font-size: 15px;
+    }
+    .timeline-section-title{
+      margin: 16px 0 10px;
+      font-size: 16px;
+      font-weight: 850;
+      color:#111;
+    }
+    .timeline-event{
+      display:grid;
+      grid-template-columns: 18px 1fr;
+      gap: 12px;
+      align-items:flex-start;
+      padding: 10px 0;
+    }
+    .timeline-point{
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: #2bbf3b;
+      margin-top: 6px;
+    }
+    .timeline-content .timeline-date{
+      font-weight: 850;
+      color:#111;
+      font-size: 14px;
+      margin-bottom: 2px;
+    }
+    .timeline-content p{
+      margin:0;
+      color:#333;
+      line-height:1.55;
+      font-size: 14px;
+    }
+    .button--alternate{
+      display:inline-block;
+      margin-top: 10px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(0,0,0,.12);
+      background: #fff;
+      color:#111;
+      font-weight: 800;
+      text-decoration:none;
+      transition: transform .12s ease, opacity .12s ease;
+      max-width: 100%;
+    }
+    .button--alternate:hover{ text-decoration:none; transform: translateY(-1px); }
+    .button--alternate:active{ transform: translateY(0px); opacity:.9; }
+
+    @media (max-width: 980px){
+      .section__inner{
+        grid-template-columns: 1fr;
+        gap: 26px;
+      }
+      .timeline-title{ font-size: 34px; }
+    }
+
+    /* ===== Contact section (same background as hero) ===== */
+    .contact{
+      margin-left: var(--railW);
+      background: var(--bg);
+      color: var(--fg);
+      padding: 64px var(--pad);
+      overflow-x: clip;
+    }
+    .contact__inner{
+      max-width: 900px;
+      margin: 0 auto;
+      background: var(--panel);
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      padding: 26px;
+      max-width: 100%;
+    }
+    .contact h2{
+      margin:0 0 10px;
+      font-size: 28px;
+      font-weight: 850;
+    }
+    .contact__copy{
+      margin:0 0 18px;
+      color: rgba(238,242,247,.85);
+      line-height: 1.55;
+      font-size: 14px;
+    }
+    .form{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      max-width: 100%;
+    }
+    .form .full{ grid-column: 1 / -1; }
+    label{
+      display:block;
+      font-size: 13px;
+      color: rgba(238,242,247,.82);
+      margin-bottom: 6px;
+      font-weight: 650;
+    }
+    input, textarea{
+      width: 100%;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.20);
+      padding: 10px 12px;
+      color: #f1f1f1;
+      outline: none;
+      font-size: 14px;
+      max-width: 100%;
+    }
+    textarea{ resize: vertical; min-height: 120px; }
+    input:focus, textarea:focus{ border-color: rgba(0,166,255,.55); }
+    .submitRow{
+      grid-column: 1 / -1;
+      display:flex;
+      justify-content:flex-start;
+      align-items:center;
+      gap: 12px;
+      margin-top: 6px;
+      flex-wrap: wrap;
+    }
+    .button--white{
+      padding: 10px 16px;
+      border-radius: 999px;
+      border: 0;
+      cursor:pointer;
+      background: #fff;
+      color:#111;
+      font-weight: 850;
+      transition: transform .12s ease, opacity .12s ease;
+      max-width: 100%;
+    }
+    .button--white:hover{ transform: translateY(-1px); }
+    .button--white:active{ transform: translateY(0); opacity:.92; }
+
+    @media (max-width: 720px){
+      .form{ grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 520px){
+      .section, .contact{
+        padding-left: 16px;
+        padding-right: 16px;
+      }
+      .contact__inner{ padding: 18px; }
+      .timeline{ padding: 18px; }
+    }
+
+    /* Popup */
+    .popup.hidden{ display:none; }
+    .popup{
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.55);
+      display:grid;
+      place-items:center;
+      z-index: 50;
+      padding: 16px;
+    }
+    .popup-content{
+      width: min(520px, 100%);
+      background: #fff;
+      color: #111;
+      border-radius: 18px;
+      box-shadow: 0 30px 90px rgba(0,0,0,.45);
+      padding: 20px 20px 18px;
+      position: relative;
+    }
+    .close-button{
+      position:absolute;
+      right: 14px;
+      top: 10px;
+      font-size: 26px;
+      line-height: 1;
+      cursor:pointer;
+      color:#666;
+      user-select:none;
+    }
+    .popup-text h2{
+      margin: 0 0 6px;
+      font-size: 20px;
+      font-weight: 900;
+    }
+    .popup-text p{
+      margin: 0 0 14px;
+      color:#333;
+      line-height: 1.5;
+      font-size: 14px;
+    }
+    .okIcon{
+      width: 44px;
+      height: 44px;
+      border-radius: 999px;
+      display:grid;
+      place-items:center;
+      background: rgba(44,160,44,.12);
+      border: 1px solid rgba(44,160,44,.25);
+      color: #2CA02C;
+      font-weight: 900;
+      font-size: 22px;
+    }
+  </style>
 </head>
+
 <body>
+  <!-- Left rail -->
+  <aside class="rail" aria-label="Left rail">
+    <div class="rail__stack">
+      <div class="rail__label">International Seminar. <span> 2026 Season</span></div>
+      <a class="rail__mail" href="mailto:ims-compling@yandex.ru" title="ims-compling@yandex.ru" aria-label="Email ims-compling@yandex.ru">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="rgba(238,242,247,.92)" aria-hidden="true">
+          <path d="M2,6.5 L2,14.5 C2,15.328 2.672,16 3.5,16 L16.5,16 C17.328,16 18,15.328 18,14.5 L18,6.5 L10,11.75 L2,6.5 Z M2,5 L10,10.25 L18,5 L10,1.25 L2,5 Z"/>
+        </svg>
+      </a>
+    </div>
+  </aside>
 
-<main class="content">
-  <header class="site-header">
+  <!-- Top nav -->
+  <div class="nav">
+    <div class="nav__inner">
+      <a href="#dates">Upcoming Sub-event</a>
+      <a href="#contact">Contact us</a>
+    </div>
+  </div>
 
-    
-    <!--меню хедера-->
-    <section class="site-header__actions">
-      <nav class="site-nav">
-        <a href="#dates" class="site-nav__item"><span>Upcoming Sub-event</span></a>
-        <!--
-        <a href="#prints" class="site-nav__item"><span>Our Journals</span></a>
-        -->
-        <a href="#contact" class="site-nav__item"><span>Contact us</span></a>
-      </nav>
+  <!-- Hero -->
+  <main class="hero">
+    <section class="utpTitle">
+      <h1>
+        A Place<br/>
+        Where Human<br/>
+        Language and<br/>
+        Algorithms Engage<br/>
+        in Dialogue
+      </h1>
     </section>
-    <!--конец меню хедера-->
 
-  </header>
-  
-  <section class="upper-landing">
-    <div class="upper-landing__colophon">
-      <!--вертикальный текст-->
-      <div class="tagline">
-        International Seminar. <span style="color: rgb(0, 166, 255);"> 2026 Season</span>
-      </div>
-      <!--конец вертикальный текст-->
-      
-      <!--связь-->
-      <div class="social">
-        <a href="mailto:ims-compling@yandex.ru" class="social__link"> 
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="#999">
-            <path d="M2,6.5 L2,14.5 C2,15.328 2.672,16 3.5,16 L16.5,16 C17.328,16 18,15.328 18,14.5 L18,6.5 L10,11.75 L2,6.5 Z M2,5 L10,10.25 L18,5 L10,1.25 L2,5 Z"/>
-          </svg>
-        </a>
-        <!--
-        <a href="https://t.me/compling_seminar" class="social__link">
-          <svg width="18" height="18" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#999">
-            <title>Telegram</title>
-            <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.292 7.081l-2.12 10.042c-.16.718-.576.891-1.165.555l-3.215-2.37-1.553 1.497c-.172.172-.316.317-.646.317l.231-3.243 5.906-5.316c.258-.231-.057-.36-.401-.13l-7.296 4.59-3.141-.984c-.682-.211-.696-.682.141-.978l13.015-5.018c.576-.215 1.071.13.892.967z"></path>
-          </svg>
-        </a>
-        -->
-      </div>
-      
-      <!--конец связь-->
-    </div>
-    
-    <!--заголовок и слоган и CTA-->
-    <div class="upper-landing__info">
-      <header class="upper-landing__header">
-        <h2>
-          A Place Where Human Language and Algorithms Engage in Dialogue
-        </h2>
-      </header>
-      <div class="upper-landing__subtitle">
-        Explore Cutting-Edge Research and Innovations
-        <p>in the Field of Language Technology
-      </div>
-     
-      <div class="upper-landing__cta">
-       <!-- 
-        <a href="#" class="button" id="take-part-btn">take part</a>
-        -->
-        <a href="#prog" class="button">Attend the seminar</a>
-      </div>
- 
-    </div>
-    <!--конец заголовок и слоган и CTA-->
-
-    <!--слайдер событий-->
-    <div class="intro-section">
-      <div class="upper-landing__slideshow">
-        <div class="landing-slideshow" id="landing-slideshow">
-          <!-- Slide 1 -->
-          <div class="landing-slideshow__slide" data-color-class="compling">
-            <h2>CompLing Seminar</h2>
-            <div class="event-date">June 22-23, 2026</div>
-            <div class="slide-line compling-line"></div>
-            
-            <div class="contentland">
-              <div class="text-zone">
-                <p>CompLing-2025 seminar explores cutting-edge research in computational linguistics, NLP, and AI, fostering collaboration between researchers and industry to drive innovation and interdisciplinary exchange.</p>
-              </div>
-              
-            </div>
-          </div>
-          
-          <!-- Slide 2 -->
-          <div class="landing-slideshow__slide" data-color-class="zakharov">
-            <h2>Zakharov.day</h2>
-            <div class="event-date">March 13, 2026</div>
-            <div class="slide-line zakharov-line"></div>
-            <div class="contentland">
-              <div class="text-zone">
-                <p>The meetup dedicated to the issues of automatic text processing, the creation and application of corpus resources, and continuing the research traditions established by the founder of the St. Petersburg School of Corpus Linguistics, V.P. Zakharov.</p>
-              </div>
-             
-            </div>
-          </div>
-      
-          <!-- Slide 3 -->
-          <!--
-          <div class="landing-slideshow__slide" data-color-class="textmining">
-            <h2>TextMining.day</h2>
-            <div class="event-date">Date to be announced</div>
-            <div class="slide-line textmining-line"></div>
-            <div class="contentland">
-              <div class="text-zone">
-                <p>Which intersection of entities will you choose for your project? Let's piece the puzzle together and explore areas like sentiment analysis, semantic modeling, and other methods we use to uncover meaning in texts.</p>
-              </div>
-            </div>
-          </div>
-          -->
-          <!-- Slide 4 -->
-          <!--
-          <div class="landing-slideshow__slide" data-color-class="llm">
-            <h2>LLM.day</h2>
-            <div class="event-date">Date to be announced</div>
-            <div class="slide-line llm-line"></div>
-            <div class="contentland">
-              <div class="text-zone">
-                <p>What challenges do we face in building large language models? From managing massive datasets to tackling high fine-tuning costs and addressing data privacy concerns, creating your own LLM is no small feat. Join us to discuss these hurdles and discover how LLMs are transforming the way we approach AI across industries.</p>
-              </div>
-            </div>
-          </div>
-          -->
-        </div>
-
-        <div id="connected-graph"></div>
-      
-        <div class="upper-landing__slideshow-controls">
-          <div class="slideshow-arrows__prev" id="ul-prev">
-            <img src="./braun-left-arrow.png" alt="Previous">
-          </div>
-
-          <div class="slideshow-dots"></div>
-
-          <div class="slideshow-arrows__next" id="ul-next">
-            <img src="./braun-right-arrow.png" alt="Next">
-          </div>
-        </div>
-
-      </div>
-      
-
-
-    
-    
-  </div>
-  
-  </section>
-<!--расписание-->
-<!--
- <section class="compling-program" id="prog">
-  <div class="container">
-    <h2 class="compling-program__title">Program: Computational Linguistics Seminar</h2>
-    <div class="program-slider">
-
-      <div class="session-block active">
-        <h3 class="session-title">
-          <span class="session-nav prev">←</span>
-          Session 1 - Russian track
-          <span class="session-date-inline">(23 June, 12:30-14.00, Room 1222)</span>
-          <span class="session-nav next">→</span>
-        </h3>
-        <div class="talk-entry">
-          <div class="talk-topic">Геометрия падежей в векторных моделях русского языка</div>
-          <div class="talk-speaker">Кирилл Черников, Илья Суров</div>
-          <div class="talk-affiliation">Университет ИТМО</div>
-        </div>
-        <div class="talk-entry">
-          <div class="talk-topic">Разработка системы анализа разноплановых характеристик поэтического текста</div>
-          <div class="talk-speaker">Арина Панкова, Елена Ягунова</div>
-          <div class="talk-affiliation">Санкт-Петербургский государственный университет</div>
-        </div>
-        <div class="talk-entry">
-          <div class="talk-topic">Динамика тем научных статей в корпусе текстов по компьютерной и корпусной лингвистике</div>
-          <div class="talk-speaker">Ольга Митрофанова</div>
-          <div class="talk-affiliation">Санкт-Петербургский государственный университет</div>
-        </div>
-        <div class="talk-entry">
-          <div class="talk-topic">Речевые тактики в ситуации конфликта в межличностном общении как составляющая языковой модели в системах искусственного интеллекта</div>
-          <div class="talk-speaker">Ольга Сытник</div>
-          <div class="talk-affiliation">Санкт-Петербургский горный университет императрицы Екатерины II</div>
-        </div>
-        <div class="talk-entry">
-          <div class="talk-topic">Проблемы исследования словообразовательного потенциала с использованием современных поисковых систем</div>
-          <div class="talk-speaker">Елена Васильева</div>
-          <div class="talk-affiliation">Иркутский государственный университет</div>
-        </div>
-        <div class="talk-entry">
-          <div class="talk-topic">Технологии векторного поиска при работе с цифровыми собраниями</div>
-          <div class="talk-speaker">Влада Погожельская</div>
-          <div class="talk-affiliation">Национальный исследовательский университет «Высшая школа экономики»</div>
+    <section class="utpSub">
+      <div class="subrow">
+        <div class="bar"></div>
+        <div class="txt">
+          Explore Cutting-Edge Research and Innovations<br/>
+          in the Field of Language Technology
         </div>
       </div>
+    </section>
 
-      <div class="session-block">
-        <h3 class="session-title">
-          <span class="session-nav prev">←</span>
-          Session 2 - Russian track
-          <span class="session-date-inline">(23 June, 15:00-17.00, Room 1222)</span>
-          <span class="session-nav next">→</span>
-        </h3>
-        <div class="talk-entry">
-          <div class="talk-topic">Использование алгоритмов машинного перевода в задаче субтитрирования образовательного видеоконтента</div>
-          <div class="talk-speaker">Екатерина Лаврентьева, Марина Коган</div>
-          <div class="talk-affiliation">Санкт-Петербургский политехнический университет Петра Великого</div>
-        </div>
-        <div class="talk-entry">
-          <div class="talk-topic">Сравнение нейросетевых синтаксических анализаторов для русского языка</div>
-          <div class="talk-speaker">Елена Шамаева</div>
-          <div class="talk-affiliation">Московский государственный университет имени М. В. Ломоносова</div>
-        </div>
-        <div class="talk-entry">
-          <div class="talk-topic">Оценка лингвистической компетенции больших языковых моделей</div>
-          <div class="talk-speaker">Ксения Студеникина, Екатерина Лютикова, Анастасия Герасимова</div>
-          <div class="talk-affiliation">Московский государственный университет имени М. В. Ломоносова</div>
-        </div>
-        <div class="talk-entry">
-          <div class="talk-topic">Генерация фан-литературы на русском языке</div>
-          <div class="talk-speaker">Дарья Середина</div>
-          <div class="talk-affiliation">Национальный исследовательский университет «Высшая школа экономики»</div>
-        </div>
-        <div class="talk-entry">
-          <div class="talk-topic">Сравнительный анализ методов настройки генеративных языковых моделей</div>
-          <div class="talk-speaker">Елизавета Сытикова, Мария Сергеева, Анастасия Колмогорова</div>
-          <div class="talk-affiliation">Национальный исследовательский университет «Высшая школа экономики»</div>
-        </div>
-        <div class="talk-entry">
-          <div class="talk-topic">Большая языковая модель и человек рассматривают живопись</div>
-          <div class="talk-speaker">Полина Налобина, Анастасия Колмогорова</div>
-          <div class="talk-affiliation">Национальный исследовательский университет «Высшая школа экономики»</div>
-        </div>
-        <div class="talk-entry">
-          <div class="talk-topic">Эмоции и темы публичного дискурса об ИИ</div>
-          <div class="talk-speaker">Анна Чижик</div>
-          <div class="talk-affiliation">Университет ИТМО</div>
-        </div>
+    <section class="utpCta">
+      <div class="cta">
+        <button class="cta-btn" id="ctaAttend" type="button">ATTEND SUB-EVENT</button>
+        <div class="cta-note">Main seminar registration opens soon</div>
+      </div>
+    </section>
+
+    <aside class="panel" aria-label="Seminar panel">
+      <h2>CompLing Seminar</h2>
+      <div class="date">June 22–23, 2026</div>
+      <div class="rule"></div>
+      <div class="desc">
+        CompLing-2026 seminar explores cutting-edge research in computational linguistics,
+        NLP, and AI, fostering collaboration between researchers and industry to drive innovation.
       </div>
 
-      <div class="session-block">
-  <h3 class="session-title">
-    <span class="session-nav prev">←</span>
-    Session 1 - English track
-    <span class="session-date-inline">(24 June, 10:00–11:30, Room 1222)</span>
-    <span class="session-nav next">→</span>
-  </h3>
-  <div class="talk-entry"><div class="talk-topic">TL;DR: Text Normalization for Social Media Corpus</div><div class="talk-speaker">Grigorii Feoktistov, Dmitry Morozov</div><div class="talk-affiliation">Novosibirsk State University, Russian National Corpus</div></div>
-  <div class="talk-entry"><div class="talk-topic">Russian Neural Morpheme Segmentation: From Lemmata to Wordforms</div><div class="talk-speaker">Dmitry Morozov, Olga Shcherbakova, Anna Glazkova</div><div class="talk-affiliation">Novosibirsk State University, University of Tyumen, Russian National Corpus</div></div>
-  <div class="talk-entry"><div class="talk-topic">An Experimental Study of Automating Explanatory Dictionary Compilation with Language Models</div><div class="talk-speaker">Timur Garipov, Dmitry Morozov, Yana Gubarkova, Anastasia Kozerenko, Anna Glazkova</div><div class="talk-affiliation">Novosibirsk State University, Yandex LLC, V.V. Vinogradov Russian Language Institute RAS, University of Tyumen, Russian National Corpus</div></div>
-  <div class="talk-entry"><div class="talk-topic">Word Sense Disambiguation in Russian: A Generative LLM Approach</div><div class="talk-speaker">Polina Gousyatskaya, Natalia Loukachevitch</div><div class="talk-affiliation">Lomonosov Moscow State University</div></div>
-  <div class="talk-entry"><div class="talk-topic">Modelling Arabic Toponym Transliteration into English and Russian</div><div class="talk-speaker">Sofia Shevtsovа</div><div class="talk-affiliation">National Research University Higher School of Economics</div></div>
-</div>
-
-<div class="session-block">
-  <h3 class="session-title">
-    <span class="session-nav prev">←</span>
-    Session 2 - English track
-    <span class="session-date-inline">(24 June, 12:00–13:30, Room 1222)</span>
-    <span class="session-nav next">→</span>
-  </h3>
-  <div class="talk-entry"><div class="talk-topic">Mapping Effective Teaching with Topic Modeling</div><div class="talk-speaker">Ivan Mamaev</div><div class="talk-affiliation">Saint Petersburg State University, Baltic State Technical University “Voenmeh” named after D.F. Ustinov</div></div>
-  <div class="talk-entry"><div class="talk-topic">What Officials Talk About? Uncovering Themes and Trends in Interviews with Russian Officials Through Topic Modeling</div><div class="talk-speaker">Sofiia Chepovetskaia</div><div class="talk-affiliation">National Research University Higher School of Economics, Saint-Petersburg State University</div></div>
-  <div class="talk-entry"><div class="talk-topic">Profiling the corpus of tutor advertising texts: a statistical and linguistic analysis</div><div class="talk-speaker">Nadezhda Ogorodova</div><div class="talk-affiliation">Baltic State Technical University “VOENMEH” named after D.F. Ustinov</div></div>
-  <div class="talk-entry"><div class="talk-topic">Creating a dataset for automatic detection of vague expressions in Russian legal texts</div><div class="talk-speaker">Olga Blinova, Alyona Berlin</div><div class="talk-affiliation">National Research University Higher School of Economics, Saint-Petersburg State University</div></div>
-  <div class="talk-entry"><div class="talk-topic">Five-Minute Reads: Exploring the Factors that Influence Automatic Summarization of Literary Texts</div><div class="talk-speaker">Alisa Lukyanchikova, Margarita Kirina</div><div class="talk-affiliation">National Research University Higher School of Economics</div></div>
-  <div class="talk-entry"><div class="talk-topic">The Influence of Language Typological Features on Neural Summarization Performance</div><div class="talk-speaker">Mark Athugodage, Olga Mitrofanova</div><div class="talk-affiliation">National Research University Higher School of Economics, Saint-Petersburg State University</div></div>
-</div>
-
-<div class="session-block">
-  <h3 class="session-title">
-    <span class="session-nav prev">←</span>
-    Session 3 - English track
-    <span class="session-date-inline">(24 June, 14:30–16:00, Room 1222)</span>
-    <span class="session-nav next">→</span>
-  </h3>
-  <div class="talk-entry"><div class="talk-topic">Optimising Terminology Processing in Unmanned Aviation: a New Approach to Term Extraction Using Prompt Engineering</div><div class="talk-speaker">Ekaterina Isaeva, Behruz Safarbekov</div><div class="talk-affiliation">Perm State University, National University of Science and Technology MISiS</div></div>
-  <div class="talk-entry"><div class="talk-topic">Dialog Flow Analytics Toolkit for a Contact Center Platform</div><div class="talk-speaker">Alena Zhivotova, Valeria Zarembo</div><div class="talk-affiliation">Erllecta LLC</div></div>
-  <div class="talk-entry"><div class="talk-topic">Measuring Public Satisfaction with Service Quality: customer-oriented approach</div><div class="talk-speaker">Svetlana Sheremetyeva, Olga Babina, Andrew Polev</div><div class="talk-affiliation">South Ural State University</div></div>
-  <div class="talk-entry"><div class="talk-topic">Emotion-Sentiment Profiling of Customer Feedback through Cluster-Driven Analysis</div><div class="talk-speaker">Olga Babina, Svetlana Sheremetyeva</div><div class="talk-affiliation">South Ural State University</div></div>
-  <div class="talk-entry"><div class="talk-topic">Do LLMs Understand Why We Write Diaries? A Method for Purpose Extraction and Clustering</div><div class="talk-speaker">Valeriya Goloviznina, Alexander Sergeev, Mikhail Melnichenko, Evgeny Kotelnikov</div><div class="talk-affiliation">European University at Saint Petersburg</div></div>
-</div>
-
-      <h3 class="session-title">
-      <span class="session-nav prev">←</span>
-       Prev Session ↔ Next Session
-      
-      <span class="session-nav next">→</span>
-      </h3>
-     
-    </div>
-  </div>
-</section>
--->
-
-
-
-  <section class="mid-landing">
-    
-    
-    
-    <div class="mid-landing__product-row" id="dates">
-      <div class="product-info">
-        <h2 class="product-info__title">Mission of the Seminar</h2>
-        <div class="product-info__copy">
-             Bridging the worlds of computational linguistics, corpus linguistics, 
-          and modern AI methods like machine learning and NLP, the seminar fosters innovation, 
-          collaboration, and a deeper understanding of language and algorithms working together. 
-          <br />
-          The main gathering takes place in <b>June</b> within the framework of the international conference <a href="https://ims.itmo.ru/eng/" target="_blank">Internet and Modern Society (IMS–2025)</a>, St. Petersburg, Russia,
-          complemented by three key meetups throughout the year: 
-          on large language models, text mining, and Zakharov Day (<b>March</b>). 
-          <br />
-          Our target audience includes linguists, data scientists, and industry professionals working with language processing and understanding technologies.        </div>
-          <!--
-          <div class="product-info__cta">
-          <a href="https://docs.google.com/forms/d/e/1FAIpQLSds-QkpbsdlcYjX2oAiJhkXej3b5BerKstOffT52E2Sk1Lbwg/viewform?usp=header" class="button--alternate">Register for the Next Event</a>
-        </div>
-        -->
+      <div class="graphCard" id="graphHost" aria-label="Interactive graph">
+        <svg id="graphSvg"></svg>
       </div>
+    </aside>
+  </main>
 
+  <!-- Mission + Zakharov.Day -->
+  <section class="section" id="dates">
+    <div class="section__inner">
+      <div>
+        <h2>Mission of the Seminar</h2>
+        <p class="copy">
+          Bridging computational linguistics, corpus linguistics, and modern AI methods, the seminar fosters collaboration and a deeper understanding of how language and algorithms interact.
+          <br/><br/>
+          <b>The main event takes place in June</b> as part of the international conference
+          <a href="https://ims.itmo.ru/eng/" target="_blank" rel="noopener">Internet and Modern Society (IMS)</a> in St. Petersburg, Russia.
+          <br>
+          <b>A complementary meetup Zakharov Day</b> is held in <b>March</b> and focuses on corpus-based and computational approaches to language.
+          <br/><br/>
+          The seminar is intended for linguists, data scientists, and industry professionals working with language technologies.
+          <br/><br/>
+          If you are interested in joining the seminar as a reviewer, <br> please fill out the
+          <a class="link-pill" href="https://forms.gle/8EGDekjKeCAWWMjQ6" target="_blank" rel="noopener">application form →</a>
+        </p>
+      </div>
 
       <div class="timeline">
         <h1 class="timeline-title">Zakharov.Day</h1>
-        <!--
+
         <p class="timeline-subtitle">
-          The meetup will take place online on <b>March 13, 2025</b>, and kick off with two keynote presentations by Margarita Kirina (HSE) on emotions in digital literature research and Olga Mitrofanova (SPbU) on creating text corpora for corpus and computational linguistics. 
-          Additionally, we invite you to submit proposals for 10-minute lightning talks focused on early-stage research.
+          The meetup will take place online on <b>March 13, 2026</b>.
+          We invite researchers, practitioners, and students to take part in the event
+          and contribute short talks on topics related to corpus and computational linguistics.
         </p>
-        -->
-        <div class="timeline-details" style="font-size: 1rem; line-height: 1.6;">
-          <p style="margin-bottom: 1em;">
-            <strong>The Zakharov.Day meetup took place online on March 13, 2025.</strong>
-            It featured keynote presentations by Margarita Kirina (HSE) on emotions in digital literature research and Olga Mitrofanova (SPbU) on building text corpora.
+
+        <div class="timeline-subtitle">
+          <p>
+            Zakharov.Day is an open forum for sharing research ideas, ongoing work,
+            methodological insights, and applied studies in language technology.
           </p>
           <p>
-            The program also included lightning talks showcasing early-stage research.
-         </p>
+            The meetup provides an opportunity to exchange perspectives, discuss current challenges,
+            and engage with the community in an informal and focused format.
+          </p>
+
+          <h3 class="timeline-section-title">Key dates:</h3>
         </div>
 
-        <!--
-        <div class="timeline-details">
-            <p>
-              These lightning talks are a great platform for sharing:
-            </p>
-            <ul class="custom-list">
-              <li><b>Initial Findings</b>: Early results and data from ongoing research.</li>
-              <li><b>Experimental Overviews</b>: Insights into the design and methodology of experiments.</li>
-              <li><b>Hypothesis Presentations</b>: Theoretical frameworks and hypotheses being tested.</li>
-              <li><b>Innovative Concepts</b>: New ideas and approaches in the field of linguistics and AI.</li>
-            </ul>
-            
-            <p>
-              This is a fantastic opportunity to engage with peers, gain feedback, and further refine your research based on the community's input.
-            </p>
-            <p class="timeline-subtitle">Our timeline:</p>
-        </div>
         <div class="timeline-event">
           <div class="timeline-point"></div>
           <div class="timeline-content">
-            <div class="timeline-date">February 20</div>
+            <div class="timeline-date">January 20</div>
             <p>registration opens for both attendees and presenters</p>
           </div>
         </div>
+
         <div class="timeline-event">
           <div class="timeline-point"></div>
           <div class="timeline-content">
-            <div class="timeline-date">March 9</div>
+            <div class="timeline-date">March 3</div>
             <p>notification of acceptance or rejection for submitted talks</p>
           </div>
         </div>
+
         <div class="timeline-event">
           <div class="timeline-point"></div>
           <div class="timeline-content">
@@ -387,85 +734,345 @@
             <p>the main meetup event</p>
           </div>
         </div>
-        -->
-        <br />
-        <div class="timeline-details">
-          <p style="margin-bottom: 1.2em;">You can now watch the keynote presentations from <b>Zakharov.Day</b>.
-          </p>
-          <a href="https://disk.yandex.ru/i/8gS2iWdx1HL1kg" target="_blank" rel="noopener" class="button--alternate">
-            🎥 Watch Recording
-          </a>
-        </div>
-        <!--
-                <div class="product-info__mobcta">
-                  <a href="https://docs.google.com/forms/d/e/1FAIpQLSds-QkpbsdlcYjX2oAiJhkXej3b5BerKstOffT52E2Sk1Lbwg/viewform?usp=header" class="button--alternate">Register for the Next Event</a>
-                </div>
-              </div>
 
-        -->
-
-      
-      
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfcz_cMJDE6rvlkNLPIR-H6fzIwLbRGvDCGLIwufSK7Y9asjg/viewform?usp=header"
+           target="_blank" rel="noopener" class="button--alternate">
+          Registration →
+        </a>
+      </div>
     </div>
-    
-    <!-- /__product-row -->
   </section>
-  <section class="lower-landing" id="contact">
-    <div class="overlay">
-        <div class="container">
-            <div class="overlay__content">
-                <h2 class="lower-landing__heading">Contact Us</h2>
-                <div class="lower-landing__copy">
-                    Have questions or need more information about the seminar? Reach out to us using the form below, and we’ll get back to you shortly.
-                </div>
-                <form class="lower-landing__form" id="contact-form" action="https://formspree.io/f/xkgopnqn" method="POST" onsubmit="submitForm(event)">
-                    <div class="form-group">
-                        <label for="name">Your Name</label>
-                        <input type="text" id="name" name="name" placeholder="Enter your name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Your Email</label>
-                        <input type="email" id="email" name="email" placeholder="Enter your email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="message">Your Message</label>
-                        <textarea id="message" name="message" rows="5" placeholder="Enter your message" required></textarea>
-                    </div>
-                    <div class="lower-landing__cta">
-                        <button type="submit" class="button--white">Submit</button>
-                    </div>
-                </form>
-                <div id="popup-success" class="popup hidden">
-                  <div class="popup-content">
-                    <span class="close-button" onclick="closePopup()">&times;</span>
-                    <div class="popup-text">
-                    <h2>Success</h2>
-                    <p>Your request has been processed successfully.</p>
-                    <div class="icon-container">
-                      <i class="fas fa-check-circle"></i>
-                    </div>
-                  </div>
-                  </div>
-                </div>
-                
-                
 
-            </div>
+  <!-- Contact -->
+  <section class="contact" id="contact">
+    <div class="contact__inner">
+      <h2>Contact Us</h2>
+      <p class="contact__copy">
+        Have questions or need more information about the seminar? Reach out to us using the form below, and we’ll get back to you shortly.
+      </p>
 
+      <form class="form" id="contact-form"
+            action="https://formspree.io/f/xkgopnqn"
+            method="POST"
+            onsubmit="submitForm(event)">
+        <div class="form-group">
+          <label for="name">Your Name</label>
+          <input type="text" id="name" name="name" placeholder="Enter your name" required>
         </div>
+
+        <div class="form-group">
+          <label for="email">Your Email</label>
+          <input type="email" id="email" name="email" placeholder="Enter your email" required>
+        </div>
+
+        <div class="form-group full">
+          <label for="message">Your Message</label>
+          <textarea id="message" name="message" rows="5" placeholder="Enter your message" required></textarea>
+        </div>
+
+        <div class="submitRow">
+          <button type="submit" class="button--white">Submit</button>
+        </div>
+      </form>
     </div>
+  </section>
 
-</section>
+  <!-- Success popup -->
+  <div id="popup-success" class="popup hidden" role="dialog" aria-modal="true" aria-label="Success">
+    <div class="popup-content">
+      <span class="close-button" onclick="closePopup()" aria-label="Close">&times;</span>
+      <div class="popup-text">
+        <h2>Success</h2>
+        <p>Your request has been processed successfully.</p>
+        <div class="okIcon" aria-hidden="true">✓</div>
+      </div>
+    </div>
+  </div>
 
-</main>
+  <script>
+    // smooth scroll
+    (function(){
+      const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const scrollToId = (id) => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        el.scrollIntoView({ behavior: prefersReduced ? 'auto' : 'smooth', block: 'start' });
+      };
 
-<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
-<script src='https://cdn.jsdelivr.net/jquery.slick/latest/slick.min.js'></script><script  src="./script.js"></script>
+      document.getElementById('ctaAttend')?.addEventListener('click', () => scrollToId('dates'));
+      document.querySelectorAll('a[href^="#"]').forEach(a => {
+        a.addEventListener('click', (e) => {
+          const href = a.getAttribute('href');
+          if (!href || href === '#') return;
+          const id = href.slice(1);
+          if (!id) return;
+          e.preventDefault();
+          scrollToId(id);
+        });
+      });
+    })();
 
-<script src="https://cdn.jsdelivr.net/npm/d3-cloud"></script>
-<script src="https://d3js.org/d3.v6.min.js"></script>
+    // Contact form submit
+    async function submitForm(event){
+      event.preventDefault();
+      const form = event.target;
+      try{
+        const res = await fetch(form.action, {
+          method: form.method || "POST",
+          body: new FormData(form),
+          headers: { "Accept": "application/json" }
+        });
+        if (res.ok){
+          form.reset();
+          openPopup();
+        } else {
+          form.submit();
+        }
+      }catch{
+        form.submit();
+      }
+    }
+    function openPopup(){
+      const p = document.getElementById("popup-success");
+      p.classList.remove("hidden");
+      p.addEventListener("click", onOverlayClick);
+      document.addEventListener("keydown", onEsc);
+    }
+    function closePopup(){
+      const p = document.getElementById("popup-success");
+      p.classList.add("hidden");
+      p.removeEventListener("click", onOverlayClick);
+      document.removeEventListener("keydown", onEsc);
+    }
+    function onOverlayClick(e){
+      if (e.target?.id === "popup-success") closePopup();
+    }
+    function onEsc(e){
+      if (e.key === "Escape") closePopup();
+    }
 
+    // Graph (bounded + draggable)
+    (function(){
+      const host = document.getElementById("graphHost");
+      const svg = d3.select("#graphSvg");
+      if (!host || !svg.node()) return;
 
+      const COLORS = {
+        0: css("--blue"),
+        1: css("--green"),
+        2: css("--orange"),
+      };
+      function css(name){ return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
 
+      const NODES0 = [
+        { id: "Computational Linguistics", group: 0, weight: 30 },
+        { id: "Corpus Linguistics", group: 1, weight: 25 },
+        { id: "NLP", group: 2, weight: 20 },
+        { id: "Text Embeddings", group: 2, weight: 15 },
+        { id: "Natural language processing", group: 2, weight: 12 },
+        { id: "Machine translation", group: 2, weight: 10 },
+        { id: "Dialog system development", group: 2, weight: 10 },
+        { id: "Speech technologies", group: 2, weight: 10 },
+        { id: "Morphological tagging", group: 0, weight: 8 },
+        { id: "Anaphora resolution", group: 0, weight: 8 },
+        { id: "Computational semantics", group: 0, weight: 8 },
+        { id: "Computational lexicography", group: 0, weight: 8 },
+        { id: "Corpora development", group: 1, weight: 10 },
+        { id: "Lexical databases", group: 1, weight: 10 },
+        { id: "Knowledge graphs", group: 1, weight: 10 },
+        { id: "Formal ontologies", group: 1, weight: 10 },
+        { id: "Topic modeling", group: 2, weight: 8 },
+        { id: "Social network analysis", group: 2, weight: 8 },
+        { id: "Sentiment analysis", group: 2, weight: 8 },
+      ];
+
+      const LINKS0 = [
+        { source: "Computational Linguistics", target: "Corpus Linguistics" },
+        { source: "Computational Linguistics", target: "Morphological tagging" },
+        { source: "Computational Linguistics", target: "Anaphora resolution" },
+        { source: "Computational Linguistics", target: "Computational semantics" },
+        { source: "Computational Linguistics", target: "Computational lexicography" },
+        { source: "Computational Linguistics", target: "NLP" },
+
+        { source: "Corpus Linguistics", target: "Corpora development" },
+        { source: "Corpus Linguistics", target: "Lexical databases" },
+        { source: "Corpus Linguistics", target: "Knowledge graphs" },
+        { source: "Corpus Linguistics", target: "Formal ontologies" },
+
+        { source: "NLP", target: "Text Embeddings" },
+        { source: "NLP", target: "Natural language processing" },
+        { source: "NLP", target: "Machine translation" },
+        { source: "NLP", target: "Dialog system development" },
+        { source: "NLP", target: "Speech technologies" },
+
+        { source: "Text Embeddings", target: "Topic modeling" },
+        { source: "Text Embeddings", target: "Social network analysis" },
+        { source: "Text Embeddings", target: "Sentiment analysis" },
+      ];
+
+      function split2(str, maxLen){
+        if (str.length <= maxLen) return [str];
+        const parts = str.split(/\s+/).filter(Boolean);
+        if (parts.length < 2) return [str];
+        let best = null;
+        for (let i=1;i<parts.length;i++){
+          const a = parts.slice(0,i).join(" ");
+          const b = parts.slice(i).join(" ");
+          const score = Math.max(a.length,b.length);
+          if (!best || score < best.score) best = {a,b,score};
+        }
+        return [best.a, best.b];
+      }
+
+      function boundaryForce(width, height, pad){
+        let nodes;
+        function force(){
+          for (const n of nodes){
+            const rr = (n._boundR ?? 10);
+            n.x = Math.max(pad + rr, Math.min(width  - pad - rr, n.x));
+            n.y = Math.max(pad + rr, Math.min(height - pad - rr, n.y));
+          }
+        }
+        force.initialize = _ => nodes = _;
+        return force;
+      }
+
+      let sim = null;
+      let ro = null;
+
+      function render(){
+        if (sim) sim.stop();
+        svg.selectAll("*").remove();
+
+        const rect = host.getBoundingClientRect();
+        const width = Math.max(320, Math.floor(rect.width));
+        const height = Math.max(260, Math.floor(rect.height));
+        svg.attr("viewBox", `0 0 ${width} ${height}`);
+
+        const nodes = NODES0.map(d => ({...d}));
+        const links = LINKS0.map(d => ({...d}));
+
+        const fontPx = width < 520 ? 11 : 12;
+        const maxLen = width < 520 ? 18 : 22;
+
+        const r = d3.scaleSqrt()
+          .domain(d3.extent(nodes, d => d.weight))
+          .range([5, 16]);
+
+        const CHAR_W = fontPx * 0.58;
+        const LINE_H = fontPx + 3;
+        const PAD = 10;
+
+        nodes.forEach(d => {
+          d._lines = split2(d.id, maxLen);
+          const maxLine = Math.max(...d._lines.map(s => s.length));
+          const w = maxLine * CHAR_W;
+          const h = d._lines.length * LINE_H;
+          d._labelRadius = Math.sqrt(w*w + h*h)/2 + PAD;
+          d._boundR = Math.max(r(d.weight) + 6, d._labelRadius);
+        });
+
+        const gLinks = svg.append("g");
+        const gNodes = svg.append("g");
+        const gLabels = svg.append("g");
+
+        const link = gLinks.selectAll("line")
+          .data(links)
+          .enter()
+          .append("line")
+          .attr("class","g-link");
+
+        const node = gNodes.selectAll("circle")
+          .data(nodes)
+          .enter()
+          .append("circle")
+          .attr("class","g-node")
+          .attr("r", d => r(d.weight))
+          .attr("fill", d => COLORS[d.group])
+          .attr("opacity", 0.92)
+          .call(
+            d3.drag()
+              .on("start", (e, d) => {
+                if (!e.active) sim.alphaTarget(0.25).restart();
+                d.fx = d.x; d.fy = d.y;
+              })
+              .on("drag", (e, d) => {
+                d.fx = e.x; d.fy = e.y;
+              })
+              .on("end", (e, d) => {
+                if (!e.active) sim.alphaTarget(0);
+                d.fx = null; d.fy = null;
+              })
+          );
+
+        const label = gLabels.selectAll("text")
+          .data(nodes)
+          .enter()
+          .append("text")
+          .attr("class","g-label")
+          .style("font-size", fontPx + "px")
+          .each(function(d){
+            const t = d3.select(this);
+            d._lines.forEach((line, i) => {
+              t.append("tspan")
+                .attr("x", 0)
+                .attr("dy", i === 0 ? 0 : LINE_H)
+                .text(line);
+            });
+          });
+
+        const cx = width * 0.52;
+        const cy = height * 0.52;
+        nodes.forEach((n) => {
+          n.x = cx + (Math.random() - 0.5) * width * 0.32;
+          n.y = cy + (Math.random() - 0.5) * height * 0.32;
+        });
+
+        const targets = {
+          0: { x: width * 0.56, y: height * 0.50 },
+          1: { x: width * 0.42, y: height * 0.62 },
+          2: { x: width * 0.70, y: height * 0.36 },
+        };
+
+        const padBox = 14;
+        sim = d3.forceSimulation(nodes)
+          .force("link", d3.forceLink(links).id(d => d.id).distance(72).strength(0.95))
+          .force("charge", d3.forceManyBody().strength(-230))
+          .force("collision", d3.forceCollide().radius(d => d._boundR).iterations(2))
+          .force("x", d3.forceX(d => targets[d.group].x).strength(0.10))
+          .force("y", d3.forceY(d => targets[d.group].y).strength(0.10))
+          .force("bounds", boundaryForce(width, height, padBox))
+          .alphaDecay(0.035);
+
+        sim.on("tick", () => {
+          link
+            .attr("x1", d => d.source.x)
+            .attr("y1", d => d.source.y)
+            .attr("x2", d => d.target.x)
+            .attr("y2", d => d.target.y);
+
+          node
+            .attr("cx", d => d.x)
+            .attr("cy", d => d.y);
+
+          label
+            .attr("transform", d => `translate(${d.x}, ${d.y - (r(d.weight) + 16)})`)
+            .attr("text-anchor","middle");
+        });
+
+        for (let i=0;i<220;i++) sim.tick();
+        sim.alpha(0.06).restart();
+      }
+
+      render();
+
+      ro?.disconnect?.();
+      ro = new ResizeObserver(() => {
+        clearTimeout(render._t);
+        render._t = setTimeout(render, 120);
+      });
+      ro.observe(host);
+    })();
+  </script>
 </body>
 </html>
