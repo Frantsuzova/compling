@@ -100,10 +100,12 @@
       font-weight: 650;
       color: var(--muted);
       font-size: 14px;
+      flex-wrap: wrap;
     }
     .nav__inner a{
       text-decoration:none;
       color: var(--muted);
+      white-space: nowrap;
     }
     .nav__inner a:hover{ text-decoration: underline; }
 
@@ -179,7 +181,7 @@
       transition: transform .12s ease, opacity .12s ease;
     }
     .cta-btn:hover{ transform: translateY(-1px); }
-    .cta-btn:active{ transform: translateY(0px); opacity: .9; }
+    .cta-btn:active{ transform: translateY(0px); opacity:.9; }
     .cta-note{
       font-size: 12px;
       color: var(--muted2);
@@ -274,7 +276,6 @@
         padding-bottom: 46px;
       }
 
-      /* REQUIRED: remove subtitle block from layout */
       .utpSub{ display:none; }
 
       .graphCard{
@@ -302,7 +303,6 @@
       overflow-x: clip;
     }
 
-    /* IMPORTANT: right column uses same min width logic as hero's right column */
     .section__inner{
       max-width: none;
       margin: 0;
@@ -327,7 +327,6 @@
     }
     .copy b{ color:#111; }
 
-    /* prevent mobile overflow for long links/words */
     .copy,
     .timeline-subtitle,
     .timeline-content p,
@@ -336,36 +335,28 @@
       word-break: break-word;
     }
 
-    /* Styled link for reviewer form */
     a.link-pill{
-  display: inline-flex;
-  align-items: baseline;
-  gap: 8px;
-
-  padding: 4px 10px;
-  border-radius: 999px;
-
-  text-decoration: none;
-  font-weight: 800;
-
-  border: 1px solid rgba(0,0,0,.10);
-  background: rgba(0,166,255,.06);
-  color: #0b2233;
-
-  transform: translateY(-1px); /* чтобы сидела по строке */
-}
-
-a.link-pill:hover{
-  background: rgba(0,166,255,.10);
-  border-color: rgba(0,0,0,.12);
-  text-decoration: none;
-}
-
-a.link-pill:active{ opacity:.92; }
-
+      display: inline-flex;
+      align-items: baseline;
+      gap: 8px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 800;
+      border: 1px solid rgba(0,0,0,.10);
+      background: rgba(0,166,255,.06);
+      color: #0b2233;
+      transform: translateY(-1px);
+    }
+    a.link-pill:hover{
+      background: rgba(0,166,255,.10);
+      border-color: rgba(0,0,0,.12);
+      text-decoration: none;
+    }
+    a.link-pill:active{ opacity:.92; }
 
     @media (max-width: 520px){
-    a.link-pill{
+      a.link-pill{
         display: inline;
         padding: 0;
         border: 0;
@@ -375,10 +366,131 @@ a.link-pill:active{ opacity:.92; }
         color: var(--blue);
         text-decoration: underline;
         text-underline-offset: 3px;
-    }
+      }
     }
 
-    /* Zakharov box */
+    /* ===== Cards ===== */
+    .infoCard{
+      width: 100%;
+      background: #f6f6f6;
+      border-radius: 18px;
+      padding: 22px 22px 18px;
+      border: 1px solid rgba(0,0,0,.08);
+      max-width: 100%;
+      position: relative;
+      overflow: hidden;
+    }
+    .infoCard::before{
+      content:"";
+      position:absolute;
+      inset: 0;
+      background:
+        radial-gradient(900px 320px at 20% 20%, rgba(0,166,255,.08), transparent 60%),
+        radial-gradient(900px 320px at 80% 80%, rgba(44,160,44,.06), transparent 60%);
+      pointer-events:none;
+    }
+    .infoCard > *{ position: relative; }
+
+    .infoCard-title{
+      margin:0;
+      font-size: 22px;
+      font-weight: 900;
+      color:#111;
+      letter-spacing: .2px;
+    }
+    .infoCard-rule{
+      margin-top: 10px;
+      height: 2px;
+      width: 100%;
+      background: var(--blue);
+      opacity: .8;
+    }
+    .infoCard-copy{
+      margin: 10px 0 0;
+      color:#333;
+      line-height:1.55;
+      font-size: 14px;
+    }
+
+    .people{
+      margin: 14px 0 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 10px;
+      max-width: 100%;
+    }
+    .people li{
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(0,0,0,.08);
+      background: rgba(255,255,255,.70);
+      color:#111;
+      line-height: 1.45;
+      font-size: 14px;
+    }
+    .people b{
+      font-weight: 900;
+      letter-spacing: .2px;
+    }
+
+    .bullets{
+      margin: 12px 0 0;
+      padding-left: 18px;
+      color:#333;
+      line-height: 1.6;
+      font-size: 15px;
+    }
+    .bullets li{ margin: 8px 0; }
+
+    .asideStack{
+      display: grid;
+      gap: 16px;
+      align-content: start;
+    }
+
+    /* ===== Program Committee: arrow pager ===== */
+    .pcPager{
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-top: 12px;
+      max-width: 100%;
+    }
+    .pcPager__btn{
+      appearance:none;
+      border: 1px solid rgba(0,0,0,.12);
+      background: rgba(255,255,255,.78);
+      color:#111;
+      border-radius: 999px;
+      width: 42px;
+      height: 42px;
+      display:grid;
+      place-items:center;
+      cursor:pointer;
+      transition: transform .12s ease, opacity .12s ease;
+      flex: 0 0 auto;
+    }
+    .pcPager__btn:hover{ transform: translateY(-1px); }
+    .pcPager__btn:active{ transform: translateY(0); opacity: .92; }
+    .pcPager__btn:disabled{
+      opacity: .45;
+      cursor: default;
+      transform: none;
+    }
+    .pcPager__btn svg{ width: 18px; height: 18px; }
+    .pcPager__meta{
+      font-size: 13px;
+      color:#444;
+      font-weight: 750;
+      letter-spacing: .2px;
+      text-align:center;
+      flex: 1 1 auto;
+      user-select:none;
+    }
+
+    /* ===== Timeline card (Zakharov.Day) ===== */
     .timeline{
       width: 100%;
       background: #f6f6f6;
@@ -394,7 +506,6 @@ a.link-pill:active{ opacity:.92; }
       letter-spacing:.2px;
       color: #2bbf3b;
     }
-    
 
     .timeline-subtitle{
       margin: 12px 0 0;
@@ -454,12 +565,17 @@ a.link-pill:active{ opacity:.92; }
       .section__inner{
         grid-template-columns: 1fr;
         gap: 26px;
-        
       }
       .timeline-title{ font-size: 34px; }
     }
 
-    /* ===== Contact section (same background as hero) ===== */
+    /* ===== Mobile: remove rail offset so nothing "sticks to the right" ===== */
+    @media (max-width: 720px){
+      .rail{ display:none; }
+      .nav, .hero, .section, .contact{ margin-left: 0 !important; }
+    }
+
+    /* ===== Contact section ===== */
     .contact{
       margin-left: var(--railW);
       background: var(--bg);
@@ -549,6 +665,8 @@ a.link-pill:active{ opacity:.92; }
       }
       .contact__inner{ padding: 18px; }
       .timeline{ padding: 18px; }
+      .infoCard{ padding: 18px; }
+      .people li{ padding: 10px 10px; }
     }
 
     /* Popup */
@@ -604,15 +722,6 @@ a.link-pill:active{ opacity:.92; }
       font-weight: 900;
       font-size: 22px;
     }
-    @media (max-width: 520px){
-      .section__inner > div{
-        padding-right: 8px;
-      }
-
-      .timeline{
-        padding-right: 20px; /* чуть больше, т.к. это карточка */
-      }
-    }
   </style>
 </head>
 
@@ -633,6 +742,8 @@ a.link-pill:active{ opacity:.92; }
   <div class="nav">
     <div class="nav__inner">
       <a href="#dates">Upcoming Sub-event</a>
+      <a href="#committee">Program Committee</a>
+      <a href="#submission">Submission</a>
       <a href="#contact">Contact us</a>
     </div>
   </div>
@@ -681,9 +792,10 @@ a.link-pill:active{ opacity:.92; }
     </aside>
   </main>
 
-  <!-- Mission + Zakharov.Day -->
-  <section class="section" id="dates">
+  <!-- Mission + Program Committee -->
+  <section class="section" id="mission">
     <div class="section__inner">
+      <!-- Left: Mission -->
       <div>
         <h2>Mission of the Seminar</h2>
         <p class="copy">
@@ -691,13 +803,109 @@ a.link-pill:active{ opacity:.92; }
           <br/><br/>
           <b>The main event takes place in June</b> as part of the international conference
           <a href="https://ims.itmo.ru/eng/" target="_blank" rel="noopener">Internet and Modern Society (IMS)</a> in St. Petersburg, Russia.
-          <br>
-          <b>A complementary meetup Zakharov Day</b> is held in <b>March</b> and focuses on corpus-based and computational approaches to language.
           <br/><br/>
           The seminar is intended for linguists, data scientists, and industry professionals working with language technologies.
           <br/><br/>
           If you are interested in joining the seminar as a reviewer, <br> please fill out the
           <a class="link-pill" href="https://forms.gle/8EGDekjKeCAWWMjQ6" target="_blank" rel="noopener">application form →</a>
+        </p>
+      </div>
+
+      <!-- Right: Program Committee (render-pager list) -->
+      <div id="committee" tabindex="-1">
+        <h2>Program Committee</h2>
+        <p class="copy">
+          The Program Committee supports the scientific quality of the seminar, including decision-making in case of disputed peer reviews and editorial guidance.
+        </p>
+
+        <template id="pcItems">
+          <li><b>Borko KOVAČEVIĆ</b>, Doctor of Linguistics, Professor, Faculty of Philology, University of Belgrade, Serbia <span style="color:#0b2233; font-weight:850;">(co-chair)</span></li>
+          <li><b>Anna CHIZHIK</b>, PhD, Associate Professor of the Information Systems in Art and Humanities Department at the Saint-Petersburg State University, Russia <span style="color:#0b2233; font-weight:850;">(co-chair)</span></li>
+          <li><b>Maria ZAKHAROVA</b>, Expert, NP “PRIOR North-West”, Russia</li>
+          <li><b>Maria TIMOFEEVA</b>, Doctor of Philology, Professor, Department of Applied and Fundamental Linguistics, Faculty of Humanities, Novosibirsk State University</li>
+          <li><b>Alexander ANTOPOLSKY</b>, Doctor of Technical Sciences, Professor, Chief Researcher, Institute of Scientific Information for Social Sciences, Russian Academy of Sciences, Russia</li>
+          <li><b>Elena YAGUNOVA</b>, Doctor of Philology, Professor, Faculty of Arts, Saint Petersburg State University, Russia</li>
+          <li><b>Katarina ČOKRLIĆ</b>, University of Bologna, Italy</li>
+          <li><b>Olga MITROFANOVA</b>, PhD, Associate Professor of the Mathematical Linguistics Department at the Saint-Petersburg State University, Russia</li>
+          <li><b>Anatoly FEFELOV</b>, Candidate of Philology, Expert at NP “PRIOR North-West”</li>
+          <li><b>Olga LYASHEVSKAYA</b>, PhD, Professor of the School of Linguistics at the National Research University Higher School of Economics, Russia</li>
+          <li><b>Mikhail ALEXANDROV</b>, PhD, Associate Professor, Russian Presidential Academy of National Economy, Russia</li>
+          <li><b>Natalia LOUKACHEVITCH</b>, Doctor of Sciences, Leading Researcher of Lomonosov Moscow State University, Russia</li>
+          <li><b>Alexander PIPERSKI</b>, PhD, Research Associate, University of Erlangen–Nuremberg, Germany</li>
+        </template>
+
+        <ul class="people" id="pcList" aria-label="Program Committee list"></ul>
+
+        <div class="pcPager" aria-label="Program Committee pagination">
+          <button class="pcPager__btn" type="button" id="pcPrev" aria-label="Previous page">
+            <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
+              <path d="M12.5 4.5L7.5 10l5 5.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+
+          <div class="pcPager__meta" id="pcMeta" aria-live="polite"></div>
+
+          <button class="pcPager__btn" type="button" id="pcNext" aria-label="Next page">
+            <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
+              <path d="M7.5 4.5L12.5 10l-5 5.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Submission -->
+  <section class="section" id="submission">
+    <div class="section__inner">
+      <div>
+        <h2>Submission</h2>
+        <p class="copy">
+          Please prepare your manuscript according to the requirements below.
+        </p>
+
+        <ul class="bullets" aria-label="Submission requirements">
+          <li>The contributions must be submitted in form of <b>Full research paper (12–15 pages)</b> and present original unpublished work from the authors.</li>
+          <li>Manuscripts submitted to the <b>CompLing–2026</b> workshop must be prepared using the <b>Springer template</b>.</li>
+          <li>
+            All submissions must be done via the <b>Microsoft CMT</b> system. Detailed instructions on how to submit, as well as links to the required template, are available on the IMS-2026 submission page:
+            <a href="https://ims.itmo.ru/submission.html" target="_blank" rel="noopener">https://ims.itmo.ru/submission.html</a>.
+          </li>
+        </ul>
+      </div>
+
+      <div class="asideStack" aria-label="Submission side cards">
+        <aside class="infoCard" aria-label="Submission quick links">
+          <h3 class="infoCard-title">Quick access</h3>
+          <div class="infoCard-rule"></div>
+          <p class="infoCard-copy">
+            IMS-2026 submission page: <br>
+            <a class="link-pill" href="https://ims.itmo.ru/submission.html" target="_blank" rel="noopener">Open page →</a>
+            <br/><br/>
+            The CMT link will appear there once it is published.
+          </p>
+        </aside>
+
+        <aside class="infoCard" aria-label="Review process">
+          <h3 class="infoCard-title">Review process</h3>
+          <div class="infoCard-rule"></div>
+          <p class="infoCard-copy">
+            Submissions are considered under a <b>triple-blind peer review</b> model and evaluated based on relevance, clarity, methodological soundness, and contribution to the field.
+          </p>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- Zakharov.Day (ID kept for CTA/nav: #dates) -->
+  <section class="section" id="dates">
+    <div class="section__inner">
+      <div>
+        <h2>Zakharov.Day</h2>
+        <p class="copy">
+          A complementary meetup is held in <b>March</b> and focuses on corpus-based and computational approaches to language.
+          <br/><br/>
+          Zakharov.Day is an open forum for sharing research ideas, ongoing work, methodological insights, and applied studies in language technology.
         </p>
       </div>
 
@@ -711,10 +919,6 @@ a.link-pill:active{ opacity:.92; }
         </p>
 
         <div class="timeline-subtitle">
-          <p>
-            Zakharov.Day is an open forum for sharing research ideas, ongoing work,
-            methodological insights, and applied studies in language technology.
-          </p>
           <p>
             The meetup provides an opportunity to exchange perspectives, discuss current challenges,
             and engage with the community in an informal and focused format.
@@ -822,6 +1026,60 @@ a.link-pill:active{ opacity:.92; }
           scrollToId(id);
         });
       });
+    })();
+
+    // Program Committee: robust render-pager (5/5/3)
+    (function(){
+      const root = document.getElementById("committee");
+      if (!root) return;
+
+      const tpl = document.getElementById("pcItems");
+      const list = document.getElementById("pcList");
+      const prevBtn = document.getElementById("pcPrev");
+      const nextBtn = document.getElementById("pcNext");
+      const meta = document.getElementById("pcMeta");
+
+      if (!tpl || !list || !prevBtn || !nextBtn || !meta) return;
+
+      const allLis = Array.from(tpl.content.querySelectorAll("li")).map(li => li.cloneNode(true));
+      const total = allLis.length;
+
+      const pageSizes = [5, 5, 3];
+      const pages = [];
+      let cursor = 0;
+      for (const size of pageSizes){
+        const slice = allLis.slice(cursor, cursor + size);
+        if (slice.length) pages.push(slice);
+        cursor += size;
+      }
+
+      let idx = 0;
+
+      function rangeText(i){
+        const start = pageSizes.slice(0, i).reduce((a,b)=>a+b, 0) + 1;
+        const end = Math.min(total, start + pages[i].length - 1);
+        return `${i+1}/${pages.length} \u2022 Showing ${start}\u2013${end} of ${total}`;
+      }
+
+      function render(i){
+        idx = Math.max(0, Math.min(pages.length - 1, i));
+        list.innerHTML = "";
+        pages[idx].forEach(li => list.appendChild(li.cloneNode(true)));
+
+        meta.textContent = rangeText(idx);
+        prevBtn.disabled = (idx === 0);
+        nextBtn.disabled = (idx === pages.length - 1);
+      }
+
+      prevBtn.addEventListener("click", () => render(idx - 1));
+      nextBtn.addEventListener("click", () => render(idx + 1));
+
+      root.addEventListener("keydown", (e) => {
+        if (e.key === "ArrowLeft") render(idx - 1);
+        if (e.key === "ArrowRight") render(idx + 1);
+      });
+
+      render(0);
     })();
 
     // Contact form submit
