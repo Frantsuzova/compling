@@ -57,6 +57,8 @@
       gap: 16px;
       pointer-events:auto;
     }
+    
+
     .rail__label{
       writing-mode: vertical-rl;
       transform: rotate(180deg);
@@ -95,6 +97,16 @@
     }
     .nav__inner{
       display:flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 28px;
+      font-weight: 650;
+      color: var(--muted);
+      font-size: 14px;
+      flex-wrap: wrap;
+    }
+    .nav__inner-sec{
+      display:flex;
       justify-content:flex-end;
       gap: 28px;
       font-weight: 650;
@@ -102,6 +114,20 @@
       font-size: 14px;
       flex-wrap: wrap;
     }
+    .nav__logos{
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-right: 24px;
+  flex: 0 0 auto;
+}
+
+.nav__logos img{
+  height: 44px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+}
     .nav__inner a{
       text-decoration:none;
       color: var(--muted);
@@ -730,6 +756,7 @@
   <aside class="rail" aria-label="Left rail">
     <div class="rail__stack">
       <div class="rail__label">International Seminar. <span> 2026 Season</span></div>
+      
       <a class="rail__mail" href="mailto:ims-compling@yandex.ru" title="ims-compling@yandex.ru" aria-label="Email ims-compling@yandex.ru">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="rgba(238,242,247,.92)" aria-hidden="true">
           <path d="M2,6.5 L2,14.5 C2,15.328 2.672,16 3.5,16 L16.5,16 C17.328,16 18,15.328 18,14.5 L18,6.5 L10,11.75 L2,6.5 Z M2,5 L10,10.25 L18,5 L10,1.25 L2,5 Z"/>
@@ -741,10 +768,15 @@
   <!-- Top nav -->
   <div class="nav">
     <div class="nav__inner">
+      <div class="nav__logos" aria-label="Organisers">
+  <img src="ims-logo.png" alt="IMS">
+  <img src="DPLS.png" alt="DPLS">
+</div> 
+<div class="nav__inner-sec">
       <a href="#dates">Upcoming Sub-event</a>
       <a href="#committee">Program Committee</a>
       <a href="#submission">Submission</a>
-      <a href="#contact">Contact us</a>
+      <a href="#contact">Contact us</a></div>
     </div>
   </div>
 
@@ -877,7 +909,7 @@
 
 
         <ul class="bullets" aria-label="Submission requirements">
-          <li><b>Submission deadline</b>: 15 March 2026</li>
+         <!-- <li><b>Submission deadline</b>: 15 March 2026</li>-->
           <li>
             Contributions intended for publication must be submitted in the form of a
             <b>full research paper (12-15 pages)</b> and must present original unpublished work.
