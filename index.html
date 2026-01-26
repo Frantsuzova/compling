@@ -748,6 +748,57 @@
       font-weight: 900;
       font-size: 22px;
     }
+
+    .cta--dual{
+  gap: 12px;
+}
+
+.cta-btn{
+  display: inline-block;
+  width: max-content;
+
+  padding: 10px 16px;
+  border-radius: 999px;
+
+  font-size: 13px;
+  font-weight: 850;
+  letter-spacing: .35px;
+  text-transform: uppercase;
+
+  border: 1px solid transparent;
+  text-decoration: none;
+  cursor: pointer;
+
+  transition: transform .12s ease, opacity .12s ease, background .12s ease;
+}
+
+.cta-btn:hover{ transform: translateY(-1px); }
+.cta-btn:active{ transform: translateY(0); opacity:.9; }
+
+/* Zakharov.Day — зелёная */
+.cta-btn--green{
+  background: rgba(44,160,44,.18);
+  border-color: rgba(44,160,44,.45);
+  color: #eaffea;
+}
+
+.cta-btn--green:hover{
+  background: rgba(44,160,44,.28);
+}
+
+/* Main event submission — голубая */
+.cta-btn--blue{
+  background: rgba(0,166,255,.18);
+  border-color: rgba(0,166,255,.45);
+  color: #eaf6ff;
+}
+
+.cta-btn--blue:hover{
+  background: rgba(0,166,255,.28);
+}
+
+ 
+
   </style>
 </head>
 
@@ -803,10 +854,19 @@
     </section>
 
     <section class="utpCta">
-      <div class="cta">
-        <button class="cta-btn" id="ctaAttend" type="button">ATTEND SUB-EVENT</button>
-        <div class="cta-note">Main seminar registration opens soon</div>
+      <div class="cta cta--dual">
+        <button class="cta-btn cta-btn--green" id="ctaAttend" type="button">
+          Attend Zakharov.Day (March)
+        </button>
+
+        <button class="cta-btn cta-btn--blue"
+                type="button"
+                onclick="document.getElementById('submission').scrollIntoView({behavior:'smooth'})">
+          Submission to CompLing (June)
+        </button>
+
       </div>
+
     </section>
 
     <aside class="panel" aria-label="Seminar panel">
@@ -916,7 +976,7 @@
           </li>
           <li>Manuscripts submitted to the <b>CompLing-2026</b> workshop must be prepared using the <b>Springer template</b>.</li>
           <li>
-            All submissions must be done via the <b>Microsoft CMT</b> system. Detailed instructions on how to submit, as well as links to the required template, are available on <a href="https://ims.itmo.ru/submission.html" target="_blank" rel="noopener">the IMS-2026 submission page</a>.
+            All submissions must be done via the <b>Microsoft CMT</b> system. Detailed instructions on how to submit, as well as links to the required template, are available on <a href="https://ims.itmo.ru/submission.html" target="_blank" rel="noopener">the IMS-2026 submission page (in Russian)</a>.
           </li>
         </ul>
       </div>
@@ -926,10 +986,12 @@
           <h3 class="infoCard-title">Quick access</h3>
           <div class="infoCard-rule"></div>
           <p class="infoCard-copy">
-            IMS-2026 submission page: <br>
+            IMS-2026 submission page (in Russian): <br>
             <a class="link-pill" href="https://ims.itmo.ru/submission.html" target="_blank" rel="noopener">Open page →</a>
             <br/><br/>
-            The submission link (Microsoft CMT) will be published on this page later.
+            The submission link (Microsoft CMT): <br>
+            <a class="link-pill" href="https://cmt3.research.microsoft.com/ITMOIMS2026/" target="_blank" rel="noopener">CMT submission page →</a>
+
           </p>
         </aside>
 
